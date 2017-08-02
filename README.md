@@ -9,7 +9,7 @@
 
 <!-- react-components-docs -->
 [DataTable.js](src/components/DataTable.js)
-### 
+### 数据Table
 
 #### Props
 

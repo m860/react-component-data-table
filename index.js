@@ -25,6 +25,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
+/**
+ * 数据Table
+ */
 var DataTable = function (_PureComponent) {
 	_inherits(DataTable, _PureComponent);
 
@@ -35,32 +38,10 @@ var DataTable = function (_PureComponent) {
 	}
 
 	_createClass(DataTable, [{
-		key: "_renderDataSource",
-		value: function _renderDataSource() {
-			var _this2 = this;
-
-			if (this.props.dataSource.length > 0) {
-				return this.props.dataSource.map(function (rowData, rowDataIndex) {
-					return _react2.default.createElement(
-						"tr",
-						{ key: rowDataIndex },
-						_this2.props.columns.map(function (column, columnIndex) {
-							return _react2.default.createElement(
-								"td",
-								{ key: columnIndex,
-									className: column.className,
-									style: column.style },
-								column.render(rowData, rowDataIndex, column, columnIndex)
-							);
-						})
-					);
-				});
-			}
-			return this.props.renderDataEmpty(this.props.columns);
-		}
-	}, {
 		key: "render",
 		value: function render() {
+			var _this2 = this;
+
 			return _react2.default.createElement(
 				"table",
 				{ className: this.props.className, style: this.props.style },
@@ -82,7 +63,22 @@ var DataTable = function (_PureComponent) {
 				_react2.default.createElement(
 					"tbody",
 					null,
-					this._renderDataSource()
+					this.props.dataSource.length > 0 && this.props.dataSource.map(function (rowData, rowDataIndex) {
+						return _react2.default.createElement(
+							"tr",
+							{ key: rowDataIndex },
+							_this2.props.columns.map(function (column, columnIndex) {
+								return _react2.default.createElement(
+									"td",
+									{ key: columnIndex,
+										className: column.className,
+										style: column.style },
+									column.render(rowData, rowDataIndex, column, columnIndex)
+								);
+							})
+						);
+					}),
+					this.props.dataSource.length <= 0 && this.props.renderDataEmpty(this.props.columns)
 				)
 			);
 		}
