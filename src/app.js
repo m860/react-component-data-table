@@ -1,7 +1,7 @@
 import 'purecss/build/pure-min.css'
 import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
-import DataTable from './DataTable'
+import DataTable from './components/DataTable'
 
 class App extends Component {
 	static propTypes = {

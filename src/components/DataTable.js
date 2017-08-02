@@ -26,7 +26,7 @@ export default class DataTable extends PureComponent {
 		renderDataEmpty: (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>)
 	};
 
-	renderDataSource() {
+	_renderDataSource() {
 		if (this.props.dataSource.length > 0) {
 			return this.props.dataSource.map((rowData, rowDataIndex)=> {
 				return (
@@ -58,7 +58,7 @@ export default class DataTable extends PureComponent {
 				</tr>
 				</thead>
 				<tbody>
-				{this.renderDataSource()}
+				{this._renderDataSource()}
 				</tbody>
 			</table>
 		);

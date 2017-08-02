@@ -35,8 +35,8 @@ var DataTable = function (_PureComponent) {
 	}
 
 	_createClass(DataTable, [{
-		key: "renderDataSource",
-		value: function renderDataSource() {
+		key: "_renderDataSource",
+		value: function _renderDataSource() {
 			var _this2 = this;
 
 			if (this.props.dataSource.length > 0) {
@@ -82,7 +82,7 @@ var DataTable = function (_PureComponent) {
 				_react2.default.createElement(
 					"tbody",
 					null,
-					this.renderDataSource()
+					this._renderDataSource()
 				)
 			);
 		}
@@ -106,7 +106,9 @@ DataTable.propTypes = {
 DataTable.defaultProps = {
 	dataSource: [],
 	className: 'pure-table pure-table-striped',
-	style: {},
+	style: {
+		width: "100%"
+	},
 	renderDataEmpty: function renderDataEmpty(definedColumn) {
 		return _react2.default.createElement(
 			"tr",
