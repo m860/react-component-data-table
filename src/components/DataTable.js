@@ -2,21 +2,92 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 /**
- 数据Table
-
- @example
+ * 数据Table
+ *
+ * @example <caption>Simple</caption>
+ *
+ * class SimpleDataTableDemo extends React.PureComponent{
+ *	render(){
+ *		const dataSource=[
+ *			{name:"name1",sex:"male"},
+ *			{name:"name2",sex:"female"}
+ *		];
+ *		const columns=[
+ *			{name:"Name",render:rowData=>rowData['name']},
+ *			{name:"Sex",render:rowData=>rowData['sex']},
+ *		];
+ *		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+ *	}
+ * }
+ *
+ * @example <caption>Empty</caption>
+ *
+ * class EmptyDataTableDemo extends React.PureComponent{
+ *	render(){
+ *		const dataSource=[];
+ *		const columns=[
+ *			{name:"Name",render:rowData=>rowData['name']},
+ *			{name:"Sex",render:rowData=>rowData['sex']},
+ *		];
+ *		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+ *	}
+ * }
+ *
+ * @example <caption>Radio DataTable</caption>
+ *
+ * class RadioDataTableDemo extends React.PureComponent{
+ *	render(){
+ *		const dataSource=[
+ *			{name:"name1",sex:"male"},
+ *			{name:"name2",sex:"female"}
+ *		];
+ *		const columns=[
+ *			{name:"",render:rowData=>{
+ *				return <input type="radio" value={rowData['name']} name="radio-data-table"/>
+ *			}},
+ *			{name:"Name",render:rowData=>rowData['name']},
+ *			{name:"Sex",render:rowData=>rowData['sex']},
+ *		];
+ *		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+ *	}
+ * }
+ *
+ * @example <caption>Checkbox DataTable</caption>
+ *
+ * class CheckboxDataTableDemo extends React.PureComponent{
+ *	render(){
+ *		const dataSource=[
+ *			{name:"name1",sex:"male"},
+ *			{name:"name2",sex:"female"}
+ *		];
+ *		const columns=[
+ *			{name:"",render:rowData=>{
+ *				return <input type="checkbox" value={rowData['name']}/>
+ *			}},
+ *			{name:"Name",render:rowData=>rowData['name']},
+ *			{name:"Sex",render:rowData=>rowData['sex']},
+ *		];
+ *		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+ *	}
+ * }
+ *
  */
 export default class DataTable extends PureComponent {
 	static propTypes = {
+		/**定义数据列*/
 		columns: PropTypes.arrayOf(PropTypes.shape({
 			name: PropTypes.string.isRequired,
 			className: PropTypes.any,
 			style: PropTypes.object,
 			render: PropTypes.func.isRequired
 		})).isRequired,
+		/**数据源*/
 		dataSource: PropTypes.array,
+		/**样式*/
 		style: PropTypes.object,
+		/**css class*/
 		className: PropTypes.any,
+		/**定义没有数据时的样式*/
 		renderDataEmpty: PropTypes.func
 	};
 	static defaultProps = {

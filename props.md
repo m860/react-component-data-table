@@ -1,14 +1,17 @@
-<%= h4('Props') %>
+## Props
 <% _.forEach(c.props, function(prop, propName) { %>
-- <%= propName %>
-    - <%= strong('required:') %> <%= prop.required %>
-    - <%=strong('type:') %> <%= prop.type.name %> <% if (prop.type.value && prop.type.value.name) { %><%= prop.type.value.name %><% } %>
-<% if (prop.type.value && prop.type.value.name && prop.type.value.name==="shape" && prop.type.value.value) {%>
-<% _.forEach(prop.type.value.value, function(prop1,propName1){ %> 
-        - <%= propName1 %>
-            - <%= strong('required:') %> <%= prop1.required%>
-            - <%= strong('type:') %> <%= prop1.name%>
-<% }) %>
+### <%= propName %>
+- required: <%= prop.required %>
+- type: <%= prop.type.name %> <% if (prop.type.value && prop.type.value.name) { %><%= prop.type.value.name %><% } %>
+<% if(prop.defaultValue) { %>
+- defaultValue: `<%=prop.defaultValue.value.replace(/\n/g,' ')%>` 
 <% } %>
-<%= prop.description %>
+<% if (prop.type.value && prop.type.value.name && prop.type.value.name==="shape" && prop.type.value.value) {%>
+- shape
+    <% _.forEach(prop.type.value.value, function(prop1,propName1){ %> 
+     - `<%= propName1 %>`
+        - required: <%= prop1.required%>
+        - type: <%= prop1.name%>
+    <% }) %>
+<% } %>
 <% }); %>

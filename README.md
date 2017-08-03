@@ -13,48 +13,62 @@
 
 [DataTable.js](src/components/DataTable.js)
 
-#### Props
+## Props
 
--   columns
+### columns
 
-    -   **required:** true
-    -   **type:** arrayOf shape
-
-          - name
-              - **required:** true
-              - **type:** string
-
-          - className
-              - **required:** false
-              - **type:** any
-
-          - style
-              - **required:** false
-              - **type:** object
-
-          - render
-              - **required:** true
-              - **type:** func
+-   required: true
+-   type: arrayOf shape
 
 
--   dataSource
-    -   **required:** false
-    -   **type:** array 
+-   shape
+    -   `name`
 
+        -   required: true
+        -   type: string
 
--   style
-    -   **required:** false
-    -   **type:** object 
+    -   `className`
 
+        -   required: false
+        -   type: any
 
--   className
-    -   **required:** false
-    -   **type:** any 
+    -   `style`
 
+        -   required: false
+        -   type: object
 
--   renderDataEmpty
-    -   **required:** false
-    -   **type:** func 
+    -   `render`
+
+        -   required: true
+        -   type: func
+
+### dataSource
+
+-   required: false
+-   type: array 
+
+-   defaultValue: `[]` 
+
+### style
+
+-   required: false
+-   type: object 
+
+-   defaultValue: `{     width: "100%" }` 
+
+### className
+
+-   required: false
+-   type: any 
+
+-   defaultValue: `'pure-table pure-table-striped'` 
+
+### renderDataEmpty
+
+-   required: false
+-   type: func 
+
+-   defaultValue: `(definedColumn)=>(<tr>     <td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td> </tr>)` 
 
 <!-- props:end -->
 
@@ -67,3 +81,100 @@
 **Extends PureComponent**
 
 数据Table
+
+**Examples**
+
+_Simple_
+
+```javascript
+class SimpleDataTableDemo extends React.PureComponent{
+render(){
+	const dataSource=[
+		{name:"name1",sex:"male"},
+		{name:"name2",sex:"female"}
+	];
+	const columns=[
+		{name:"Name",render:rowData=>rowData['name']},
+		{name:"Sex",render:rowData=>rowData['sex']},
+	];
+	return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+}
+}
+```
+
+_Empty_
+
+```javascript
+class EmptyDataTableDemo extends React.PureComponent{
+render(){
+	const dataSource=[];
+	const columns=[
+		{name:"Name",render:rowData=>rowData['name']},
+		{name:"Sex",render:rowData=>rowData['sex']},
+	];
+	return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+}
+}
+```
+
+_Radio DataTable_
+
+```javascript
+class RadioDataTableDemo extends React.PureComponent{
+render(){
+	const dataSource=[
+		{name:"name1",sex:"male"},
+		{name:"name2",sex:"female"}
+	];
+	const columns=[
+		{name:"",render:rowData=>{
+			return <input type="radio" value={rowData['name']} name="radio-data-table"/>
+		}},
+		{name:"Name",render:rowData=>rowData['name']},
+		{name:"Sex",render:rowData=>rowData['sex']},
+	];
+	return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+}
+}
+```
+
+_Checkbox DataTable_
+
+```javascript
+class CheckboxDataTableDemo extends React.PureComponent{
+render(){
+	const dataSource=[
+		{name:"name1",sex:"male"},
+		{name:"name2",sex:"female"}
+	];
+	const columns=[
+		{name:"",render:rowData=>{
+			return <input type="checkbox" value={rowData['name']}/>
+		}},
+		{name:"Name",render:rowData=>rowData['name']},
+		{name:"Sex",render:rowData=>rowData['sex']},
+	];
+	return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+}
+}
+```
+
+## columns
+
+定义数据列
+
+## dataSource
+
+数据源
+
+## style
+
+样式
+
+## className
+
+css class
+
+## renderDataEmpty
+
+定义没有数据时的样式
