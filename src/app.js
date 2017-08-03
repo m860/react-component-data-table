@@ -3,12 +3,7 @@ import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
 import DataTable from './components/DataTable'
 
-class App extends Component {
-	static propTypes = {
-		children: PropTypes.any
-		, location: PropTypes.any
-	}
-
+class DataTableExample extends Component {
 	constructor(props) {
 		super(props);
 		this.dataSource = [

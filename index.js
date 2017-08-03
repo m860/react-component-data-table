@@ -20,13 +20,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by jean.h.ma on 5/9/17.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
- * 数据Table
+ 数据Table
+
+ @example
  */
 var DataTable = function (_PureComponent) {
 	_inherits(DataTable, _PureComponent);
@@ -38,10 +37,39 @@ var DataTable = function (_PureComponent) {
 	}
 
 	_createClass(DataTable, [{
-		key: "render",
-		value: function render() {
+		key: "_renderDataSource",
+
+
+		/**
+   * @private
+   *
+   * render data source
+   * */
+		value: function _renderDataSource() {
 			var _this2 = this;
 
+			if (this.props.dataSource.length > 0) {
+				return this.props.dataSource.map(function (rowData, rowDataIndex) {
+					return _react2.default.createElement(
+						"tr",
+						{ key: rowDataIndex },
+						_this2.props.columns.map(function (column, columnIndex) {
+							return _react2.default.createElement(
+								"td",
+								{ key: columnIndex,
+									className: column.className,
+									style: column.style },
+								column.render(rowData, rowDataIndex, column, columnIndex)
+							);
+						})
+					);
+				});
+			}
+			return this.props.renderDataEmpty(this.props.columns);
+		}
+	}, {
+		key: "render",
+		value: function render() {
 			return _react2.default.createElement(
 				"table",
 				{ className: this.props.className, style: this.props.style },
@@ -63,22 +91,7 @@ var DataTable = function (_PureComponent) {
 				_react2.default.createElement(
 					"tbody",
 					null,
-					this.props.dataSource.length > 0 && this.props.dataSource.map(function (rowData, rowDataIndex) {
-						return _react2.default.createElement(
-							"tr",
-							{ key: rowDataIndex },
-							_this2.props.columns.map(function (column, columnIndex) {
-								return _react2.default.createElement(
-									"td",
-									{ key: columnIndex,
-										className: column.className,
-										style: column.style },
-									column.render(rowData, rowDataIndex, column, columnIndex)
-								);
-							})
-						);
-					}),
-					this.props.dataSource.length <= 0 && this.props.renderDataEmpty(this.props.columns)
+					this._renderDataSource()
 				)
 			);
 		}

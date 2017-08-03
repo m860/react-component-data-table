@@ -1,0 +1,89 @@
+{
+  "src/components/DataTable.js": {
+    "description": "数据Table\n\n @example Simple\n ```javascript\n class DataTableExample extends Component {\n    constructor(props) {\n        super(props);\n        this.dataSource = [\n            {name: \"Jean\", sex: \"mail\"},\n            {name: \"Jean2\", sex: \"mail\"},\n            {name: \"Jean3\", sex: \"mail\"},\n            {name: \"Jean4\", sex: \"mail\"},\n            {name: \"Jean5\", sex: \"mail\"},\n            {name: \"Jean6\", sex: \"mail\"},\n            {name: \"Jean7\", sex: \"mail\"},\n            {name: \"Jean8\", sex: \"mail\"},\n            {name: \"Jean9\", sex: \"mail\"},\n            {name: \"Jean10\", sex: \"mail\"},\n            {name: \"Jean11\", sex: \"mail\"},\n            {name: \"Jean12\", sex: \"mail\"},\n        ];\n        this.dataTableColumns = [{\n            name: \"Name\",\n            render: (rowData)=>rowData['name']\n        }, {\n            name: \"Sex\",\n            render: (rowData)=>rowData['sex']\n        }];\n    }\n\n    render() {\n        return (\n            <div id=\"app\">\n                <h5>Simple DataTable</h5>\n                <DataTable columns={this.dataTableColumns} dataSource={this.dataSource.slice(0,3)}></DataTable>\n                <h5>Empty DataTable</h5>\n                <DataTable columns={this.dataTableColumns}></DataTable>\n                <h5>Radio DataTable</h5>\n                <DataTable columns={[{\n                    name:\"\",\n                    render:rowData=>{\n                        return (\n                            <input type=\"radio\" value={rowData.name} name=\"dt-radio\"/>\n                        );\n                    }\n                },...this.dataTableColumns]} dataSource={this.dataSource.slice(0,3)}/>\n                <h5>Checkbox DataTable</h5>\n                <DataTable columns={[{\n                    name:\"\",\n                    render:rowData=>{\n                        return (\n                            <input type=\"checkbox\" value={rowData.name}/>\n                        );\n                    }\n                },...this.dataTableColumns]} dataSource={this.dataSource.slice(0,3)}/>\n            </div>\n        );\n    }\n }\n ```",
+    "methods": [
+      {
+        "name": "_renderDataSource",
+        "docblock": "@private\n\nrender data source",
+        "modifiers": [],
+        "params": [],
+        "returns": null,
+        "description": null
+      }
+    ],
+    "props": {
+      "columns": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "shape",
+            "value": {
+              "name": {
+                "name": "string",
+                "required": true
+              },
+              "className": {
+                "name": "any",
+                "required": false
+              },
+              "style": {
+                "name": "object",
+                "required": false
+              },
+              "render": {
+                "name": "func",
+                "required": true
+              }
+            }
+          }
+        },
+        "required": true,
+        "description": ""
+      },
+      "dataSource": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "{\n    width: \"100%\"\n}",
+          "computed": false
+        }
+      },
+      "className": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "'pure-table pure-table-striped'",
+          "computed": false
+        }
+      },
+      "renderDataEmpty": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "(definedColumn)=>(<tr>\n    <td colSpan={definedColumn.length} style={{textAlign:\"center\"}}>NO DATA</td>\n</tr>)",
+          "computed": false
+        }
+      }
+    }
+  }
+}

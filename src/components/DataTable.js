@@ -1,11 +1,10 @@
-/**
- * Created by jean.h.ma on 5/9/17.
- */
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 /**
- * 数据Table
+ 数据Table
+
+ @example
  */
 export default class DataTable extends PureComponent {
 	static propTypes = {
@@ -31,6 +30,30 @@ export default class DataTable extends PureComponent {
 		</tr>)
 	};
 
+	/**
+	 * @private
+	 *
+	 * render data source
+	 * */
+	_renderDataSource() {
+		if (this.props.dataSource.length > 0) {
+			return this.props.dataSource.map((rowData, rowDataIndex)=> {
+				return (
+					<tr key={rowDataIndex}>
+						{this.props.columns.map((column, columnIndex)=> {
+							return (
+								<td key={columnIndex}
+									className={column.className}
+									style={column.style}>{column.render(rowData, rowDataIndex, column, columnIndex)}</td>
+							);
+						})}
+					</tr>
+				);
+			});
+		}
+		return this.props.renderDataEmpty(this.props.columns);
+	}
+
 	render() {
 		return (
 			<table className={this.props.className} style={this.props.style}>
@@ -44,20 +67,7 @@ export default class DataTable extends PureComponent {
 				</tr>
 				</thead>
 				<tbody>
-				{this.props.dataSource.length > 0 && this.props.dataSource.map((rowData, rowDataIndex)=> {
-					return (
-						<tr key={rowDataIndex}>
-							{this.props.columns.map((column, columnIndex)=> {
-								return (
-									<td key={columnIndex}
-										className={column.className}
-										style={column.style}>{column.render(rowData, rowDataIndex, column, columnIndex)}</td>
-								);
-							})}
-						</tr>
-					);
-				})}
-				{this.props.dataSource.length <= 0 && this.props.renderDataEmpty(this.props.columns)}
+				{this._renderDataSource()}
 				</tbody>
 			</table>
 		);

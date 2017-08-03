@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "export NODE_ENV=development && webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
-    "build": "./node_modules/.bin/babel --presets=es2015,stage-0,react src/components/DataTable.js --out-file index.js && ./node_modules/react-docgen-readme/bin/cli.js src/components/",
+    "build": "./node_modules/.bin/babel --presets=es2015,stage-0,react src/components/DataTable.js --out-file index.js && ./node_modules/react-docgen-readme/bin/cli.js src/components/ --template props.md --delimiter props && documentation readme src/components/DataTable.js --section 'API'",
     "publish": "npm run build && npm publish --access public",
     "win-dev": "set NODE_ENV=development&&webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
     "win-build": "set NODE_ENV=production&&webpack --progress --profile --colors"
