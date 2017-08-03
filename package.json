@@ -1,26 +1,26 @@
 {
   "name": "react-component-data-table",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "export NODE_ENV=development && webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
     "build": "./node_modules/.bin/babel --presets=es2015,stage-0,react src/components/DataTable.js --out-file index.js && ./node_modules/react-docgen-readme/bin/cli.js src/components/ --template props.md --delimiter props && documentation readme src/components/DataTable.js --section 'API'",
-    "publish": "npm run build && npm publish --access public",
+    "publish": "npm publish --access public",
     "win-dev": "set NODE_ENV=development&&webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
     "win-build": "set NODE_ENV=production&&webpack --progress --profile --colors"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/m860/react-component-navigationbar.git"
+    "url": "git+https://github.com/m860/react-component-data-table.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/m860/react-component-navigationbar/issues"
+    "url": "https://github.com/m860/react-component-data-table/issues"
   },
-  "homepage": "https://github.com/m860/react-component-navigationbar#readme",
+  "homepage": "https://github.com/m860/react-component-data-table#readme",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-cli": "^6.22.2",
