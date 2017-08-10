@@ -147,7 +147,7 @@ class DataTableWithPaginationDemo extends React.PureComponent{
 class Example extends Component {
 	render() {
 		return (
-			<div>
+			<div style={{paddingBottom:"50px"}}>
 				<h5>Simple DataTable</h5>
 				<SimpleDataTableDemo/>
 				<h5>Empty DataTable</h5>
