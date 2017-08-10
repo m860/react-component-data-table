@@ -57,7 +57,7 @@ var Pagination = function (_PureComponent) {
   * @property {Function} onPageChange - 分页事件监听
   * @property {Number} total - 总记录数
   * @property {?Object} style - 样式
-  * @property {String} className [ pagination ] - css class样式
+  * @property {String} className [ pagination ] - css class样式,样式定义在`css/Pagination.css`
   * @property {?Number} displayPageCount [ 5 ] - 最多可以显示多少页面
   * */
 	function Pagination(props) {

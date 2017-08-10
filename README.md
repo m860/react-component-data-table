@@ -9,15 +9,32 @@
 
 <!-- endbadge -->
 
+## Screen Shot
+
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/datatable.png"/>
+
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/pagination.gif"/>
+
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/datatablewithpagination.gif"/>
+
 ## Install
 
 ```shell
 $ npm i react-component-data-table --save
 ```
 
-## Screen Shot
+## Import
 
-<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/datatable.png"/>
+```javascript
+import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data-table'
+```
+
+## TODO
+
+-   [x] DataTable
+-   [x] Pagination
+-   [x] DataTableWithPagination
+-   [x] DataTableWithPagination 添加索引显示
 
 # API
 
@@ -211,5 +228,5 @@ _从1开始分页_
 -   `onPageChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 分页事件监听
 -   `total` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 总记录数
 -   `style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 样式
--   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** [ pagination ] - css class样式
+-   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** [ pagination ] - css class样式,样式定义在`css/Pagination.css`
 -   `displayPageCount` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 5 ] - 最多可以显示多少页面
