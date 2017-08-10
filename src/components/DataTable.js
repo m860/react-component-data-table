@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 /**
- * 数据Table
+ * DataTable - 数据表
  *
  * @example <caption>Simple</caption>
  *
@@ -73,26 +73,37 @@ import PropTypes from "prop-types";
  *
  */
 export default class DataTable extends PureComponent {
+	/**
+	 * @property {Array<Object>} columns
+	 * @property {String} columns[].name
+	 * @property {?String} columns[].className
+	 * @property {?Object} columns[].style
+	 * @property {Function} columns[].render
+	 *
+	 * @property {?Array} dataSource [ [] ]
+	 *
+	 * @property {?Object} style
+	 *
+	 * @property {?String} className [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
+	 *
+	 * @property {?Function} renderDataEmpty [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
+	 *
+	 * */
 	static propTypes = {
-		/**定义数据列*/
 		columns: PropTypes.arrayOf(PropTypes.shape({
 			name: PropTypes.string.isRequired,
 			className: PropTypes.any,
 			style: PropTypes.object,
 			render: PropTypes.func.isRequired
 		})).isRequired,
-		/**数据源*/
 		dataSource: PropTypes.array,
-		/**样式*/
 		style: PropTypes.object,
-		/**css class*/
 		className: PropTypes.any,
-		/**定义没有数据时的样式*/
 		renderDataEmpty: PropTypes.func
 	};
 	static defaultProps = {
 		dataSource: [],
-		className: 'pure-table pure-table-striped',
+		className: 'data-table',
 		style: {
 			width: "100%"
 		},

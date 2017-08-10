@@ -1,7 +1,7 @@
-import 'purecss/build/pure-min.css'
 import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
 import DataTable from './components/DataTable'
+import './sass/DataTable.sass'
 
 class SimpleDataTableDemo extends React.PureComponent{
 	render(){

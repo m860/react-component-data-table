@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "export NODE_ENV=development && webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
-    "build": "./node_modules/.bin/babel --presets=es2015,stage-0,react src/components/DataTable.js --out-file index.js && ./node_modules/react-docgen-readme/bin/cli.js src/components/ --template props.md --delimiter props && documentation readme src/components/DataTable.js --section 'API'",
+    "build": "./build",
     "publish": "npm publish --access public",
     "win-dev": "set NODE_ENV=development&&webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
     "win-build": "set NODE_ENV=production&&webpack --progress --profile --colors"
@@ -44,7 +44,6 @@
     "image-webpack-loader": "^1.7.0",
     "node-sass": "^3.4.2",
     "postcss-loader": "^0.8.2",
-    "react-docgen-readme": "0.0.1",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -53,7 +52,6 @@
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
-    "purecss": "^1.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   }

@@ -9,68 +9,15 @@
 
 <!-- endbadge -->
 
-<!-- props -->
+## Install
 
-[DataTable.js](src/components/DataTable.js)
+```shell
+$ npm i react-component-data-table --save
+```
 
-## Props
+## Screen Shot
 
-### columns
-
--   required: true
--   type: arrayOf shape
-
-
--   shape
-    -   `name`
-
-        -   required: true
-        -   type: string
-
-    -   `className`
-
-        -   required: false
-        -   type: any
-
-    -   `style`
-
-        -   required: false
-        -   type: object
-
-    -   `render`
-
-        -   required: true
-        -   type: func
-
-### dataSource
-
--   required: false
--   type: array 
-
--   defaultValue: `[]` 
-
-### style
-
--   required: false
--   type: object 
-
--   defaultValue: `{     width: "100%" }` 
-
-### className
-
--   required: false
--   type: any 
-
--   defaultValue: `'pure-table pure-table-striped'` 
-
-### renderDataEmpty
-
--   required: false
--   type: func 
-
--   defaultValue: `(definedColumn)=>(<tr>     <td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td> </tr>)` 
-
-<!-- props:end -->
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/datatable.png"/>
 
 # API
 
@@ -80,7 +27,7 @@
 
 **Extends PureComponent**
 
-数据Table
+DataTable - 数据表
 
 **Examples**
 
@@ -159,22 +106,110 @@ render(){
 }
 ```
 
-## columns
+### propTypes
 
-定义数据列
+**Properties**
 
-## dataSource
+-   `columns` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>** 
+    -   `columns[].name` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `columns[].className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
+    -   `columns[].style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 
+    -   `columns[].render` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 
+-   `dataSource` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)?** \[ \[] ]
+-   `style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 
+-   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
+-   `renderDataEmpty` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
 
-数据源
+## DataTableWithPagination
 
-## style
+**Extends PureComponent**
 
-样式
+带分页的DataTable,由DataTable和Pagination组合的复合组件
 
-## className
+### getGlobalRowIndex
 
-css class
+获取DataTable全局数据索引
 
-## renderDataEmpty
+**Parameters**
 
-定义没有数据时的样式
+-   `localRowIndex` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 当前分页中的数据索引
+
+Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 全局数据索引
+
+### propTypes
+
+[...DataTable.propTypes](#datatableproptypes)
+[...Pagination.propTypes](#paginationproptypes)
+
+**Properties**
+
+-   `style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 
+-   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
+-   `dataTableStyle` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** DataTable样式
+-   `dataTableClassName` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** DataTable css class
+-   `paginationStyle` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** Pagination 样式
+-   `paginationClassName` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Pagination css class
+-   `showIndex` **[Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** [ true ] - 是否显示索引列
+
+## Pagination
+
+**Extends PureComponent**
+
+Pagination - 页码
+
+**Parameters**
+
+-   `props`  
+
+**Examples**
+
+_从0开始分页_
+
+```javascript
+<Pagination
+   onPageChange={(pageInfo)=>{
+					console.log('page change',pageInfo)
+				}}
+     total={23}/>
+```
+
+_从1开始分页_
+
+```javascript
+<Pagination
+   startPageNumber={1}
+   pageIndex={1}
+   onPageChange={(pageInfo)=>{
+	console.log('page change',pageInfo)
+}}
+   total={100}/>
+```
+
+### totalPage
+
+总页数
+
+### pageIndex
+
+当前页码
+
+### pageSize
+
+每页记录数
+
+### startPageNumber
+
+起始分页页码
+
+### propTypes
+
+**Properties**
+
+-   `startPageNumber` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 0 ] - 分页开始的起始页`0`或者`1`
+-   `pageIndex` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 0 ] - 当前页
+-   `pageSize` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 10 ] - 每页记录数
+-   `onPageChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 分页事件监听
+-   `total` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 总记录数
+-   `style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 样式
+-   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** [ pagination ] - css class样式
+-   `displayPageCount` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 5 ] - 最多可以显示多少页面

@@ -4,3 +4,4 @@ webpack.config.js
 .eslintrc
 .idea
 props.md
+build
