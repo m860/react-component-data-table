@@ -28,28 +28,35 @@ export default class Pagination extends PureComponent {
 	 * @property {?Number} startPageNumber [ 0 ] - 分页开始的起始页`0`或者`1`
 	 * @property {?Number} pageIndex [ 0 ] - 当前页
 	 * @property {?Number} pageSize [ 10 ] - 每页记录数
-	 * @property {Function} onPageChange - 分页事件监听
+	 * @property {?Function} onPageChange [ ()=>null ] - 分页事件监听
 	 * @property {Number} total - 总记录数
 	 * @property {?Object} style - 样式
 	 * @property {String} className [ pagination ] - css class样式,样式定义在`css/Pagination.css`
 	 * @property {?Number} displayPageCount [ 5 ] - 最多可以显示多少页面
+	 * @property {?Function} renderNextPage [ ()=>(">") ] - `>`按钮样式
+	 * @property {?Function} renderPrevPage [ ()=>("<") ] - `<`按钮样式
 	 * */
 	static propTypes = {
 		startPageNumber: PropTypes.number,
 		pageIndex: PropTypes.number,
 		pageSize: PropTypes.number,
-		onPageChange: PropTypes.func.isRequired,
+		onPageChange: PropTypes.func,
 		total: PropTypes.number.isRequired,
 		style: PropTypes.object,
 		className: PropTypes.any,
-		displayPageCount: PropTypes.number
+		displayPageCount: PropTypes.number,
+		renderNextPage:PropTypes.func,
+		renderPrevPage:PropTypes.func,
 	};
 	static defaultProps = {
 		startPageNumber: 0,
 		pageIndex: 0,
 		pageSize: 10,
+		onPageChange:()=>null,
 		className: "pagination",
-		displayPageCount: 5
+		displayPageCount: 5,
+		renderNextPage:()=>(">"),
+		renderPrevPage:()=>("<")
 	};
 
 	constructor(props) {
@@ -74,6 +81,7 @@ export default class Pagination extends PureComponent {
 
 	/**
 	 * 当前页码
+	 * @readonly
 	 * */
 	get pageIndex() {
 		return this.state.pageIndex;
@@ -81,6 +89,7 @@ export default class Pagination extends PureComponent {
 
 	/**
 	 * 每页记录数
+	 * @readonly
 	 * */
 	get pageSize() {
 		return this.state.pageSize;
@@ -88,6 +97,7 @@ export default class Pagination extends PureComponent {
 
 	/**
 	 * 起始分页页码
+	 * @readonly
 	 * */
 	get startPageNumber() {
 		return this.state.startPageNumber;
@@ -143,7 +153,7 @@ export default class Pagination extends PureComponent {
 						this.setState(state,()=>{
 							this.props.onPageChange(Object.assign({},this.state));
 						})
-					}} href="javascript:void(0)"><i className="fa fa-angle-left"></i></a>
+					}} href="javascript:void(0)">{this.props.renderPrevPage()}</a>
 				</li>
 				{hasLeft && <li>...</li>}
 				{displayPages.map((num, i)=> {
@@ -172,7 +182,7 @@ export default class Pagination extends PureComponent {
 						this.setState(state,()=>{
 							this.props.onPageChange(Object.assign({},this.state));
 						})
-					}} href="javascript:void(0)"><i className="fa fa-angle-right"></i></a>
+					}} href="javascript:void(0)">{this.props.renderNextPage()}</a>
 				</li>
 			</ul>
 		);

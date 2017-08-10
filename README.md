@@ -33,6 +33,8 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 
 -   [x] DataTable
 -   [x] Pagination
+-   [x] Pagination - 自定义上下页翻页样式
+-   [ ] Pagination - 自定义页码样式
 -   [x] DataTableWithPagination
 -   [x] DataTableWithPagination 添加索引显示
 
@@ -225,8 +227,10 @@ _从1开始分页_
 -   `startPageNumber` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 0 ] - 分页开始的起始页`0`或者`1`
 -   `pageIndex` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 0 ] - 当前页
 -   `pageSize` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 10 ] - 每页记录数
--   `onPageChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 分页事件监听
+-   `onPageChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ ()=>null ] - 分页事件监听
 -   `total` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 总记录数
 -   `style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 样式
 -   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** [ pagination ] - css class样式,样式定义在`css/Pagination.css`
 -   `displayPageCount` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 5 ] - 最多可以显示多少页面
+-   `renderNextPage` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ ()=>(">") ] - `>`按钮样式
+-   `renderPrevPage` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ ()=>("<") ] - `<`按钮样式

@@ -46,11 +46,15 @@ export default class DataTableWithPagination extends PureComponent {
 	 * @return {Number} - 全局数据索引
 	 * */
 	getGlobalRowIndex(localRowIndex:Number):Number{
-		const index = this.refs['pagination'].pageIndex * this.refs['pagination'].pageSize;
-		if(this.refs['pagination'].startPageNumber===0) {
-			return index + localRowIndex+1;
+		const pagination=this.refs['pagination'];
+		if(pagination) {
+			const index = this.refs['pagination'].pageIndex * this.refs['pagination'].pageSize;
+			if (this.refs['pagination'].startPageNumber === 0) {
+				return index + localRowIndex + 1;
+			}
+			return index + localRowIndex;
 		}
-		return  index + localRowIndex;
+		return localRowIndex+1;
 	}
 
 	render() {

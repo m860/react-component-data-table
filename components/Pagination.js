@@ -54,11 +54,13 @@ var Pagination = function (_PureComponent) {
   * @property {?Number} startPageNumber [ 0 ] - 分页开始的起始页`0`或者`1`
   * @property {?Number} pageIndex [ 0 ] - 当前页
   * @property {?Number} pageSize [ 10 ] - 每页记录数
-  * @property {Function} onPageChange - 分页事件监听
+  * @property {?Function} onPageChange [ ()=>null ] - 分页事件监听
   * @property {Number} total - 总记录数
   * @property {?Object} style - 样式
   * @property {String} className [ pagination ] - css class样式,样式定义在`css/Pagination.css`
   * @property {?Number} displayPageCount [ 5 ] - 最多可以显示多少页面
+  * @property {?Function} renderNextPage [ ()=>(">") ] - `>`按钮样式
+  * @property {?Function} renderPrevPage [ ()=>("<") ] - `<`按钮样式
   * */
 	function Pagination(props) {
 		_classCallCheck(this, Pagination);
@@ -137,7 +139,7 @@ var Pagination = function (_PureComponent) {
 									_this2.props.onPageChange(Object.assign({}, _this2.state));
 								});
 							}, href: "javascript:void(0)" },
-						_react2.default.createElement("i", { className: "fa fa-angle-left" })
+						this.props.renderPrevPage()
 					)
 				),
 				hasLeft && _react2.default.createElement(
@@ -184,7 +186,7 @@ var Pagination = function (_PureComponent) {
 									_this2.props.onPageChange(Object.assign({}, _this2.state));
 								});
 							}, href: "javascript:void(0)" },
-						_react2.default.createElement("i", { className: "fa fa-angle-right" })
+						this.props.renderNextPage()
 					)
 				)
 			);
@@ -200,6 +202,7 @@ var Pagination = function (_PureComponent) {
 
 		/**
    * 当前页码
+   * @readonly
    * */
 
 	}, {
@@ -210,6 +213,7 @@ var Pagination = function (_PureComponent) {
 
 		/**
    * 每页记录数
+   * @readonly
    * */
 
 	}, {
@@ -220,6 +224,7 @@ var Pagination = function (_PureComponent) {
 
 		/**
    * 起始分页页码
+   * @readonly
    * */
 
 	}, {
@@ -236,17 +241,28 @@ Pagination.propTypes = {
 	startPageNumber: _propTypes2.default.number,
 	pageIndex: _propTypes2.default.number,
 	pageSize: _propTypes2.default.number,
-	onPageChange: _propTypes2.default.func.isRequired,
+	onPageChange: _propTypes2.default.func,
 	total: _propTypes2.default.number.isRequired,
 	style: _propTypes2.default.object,
 	className: _propTypes2.default.any,
-	displayPageCount: _propTypes2.default.number
+	displayPageCount: _propTypes2.default.number,
+	renderNextPage: _propTypes2.default.func,
+	renderPrevPage: _propTypes2.default.func
 };
 Pagination.defaultProps = {
 	startPageNumber: 0,
 	pageIndex: 0,
 	pageSize: 10,
+	onPageChange: function onPageChange() {
+		return null;
+	},
 	className: "pagination",
-	displayPageCount: 5
+	displayPageCount: 5,
+	renderNextPage: function renderNextPage() {
+		return ">";
+	},
+	renderPrevPage: function renderPrevPage() {
+		return "<";
+	}
 };
 exports.default = Pagination;

@@ -68,11 +68,15 @@ var DataTableWithPagination = function (_PureComponent) {
    * @property {?Boolean} showIndex [ true ] - 是否显示索引列
    * */
 		value: function getGlobalRowIndex(localRowIndex) {
-			var index = this.refs['pagination'].pageIndex * this.refs['pagination'].pageSize;
-			if (this.refs['pagination'].startPageNumber === 0) {
-				return index + localRowIndex + 1;
+			var pagination = this.refs['pagination'];
+			if (pagination) {
+				var index = this.refs['pagination'].pageIndex * this.refs['pagination'].pageSize;
+				if (this.refs['pagination'].startPageNumber === 0) {
+					return index + localRowIndex + 1;
+				}
+				return index + localRowIndex;
 			}
-			return index + localRowIndex;
+			return localRowIndex + 1;
 		}
 	}, {
 		key: "render",
