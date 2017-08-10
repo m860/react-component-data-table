@@ -62,11 +62,27 @@ export default class DataTableWithPagination extends PureComponent {
 		const paginationPropKeys = Object.keys(Pagination.propTypes).concat(["paginationStyle", "paginationClassName"]);
 		let dataTableOption = {};
 		dataTablePropKeys.filter(f=>f !== "style" || f !== "className").forEach(k=> {
-			dataTableOption[k] = this.props[k];
+			if(k==="dataTableStyle"){
+				dataTableOption['style']=this.props[k];
+			}
+			else if(k==="dataTableClassName"){
+				dataTableOption['className']=this.props[k];
+			}
+			else {
+				dataTableOption[k] = this.props[k];
+			}
 		});
 		let paginationOption = {};
 		paginationPropKeys.filter(f=>f !== "style" || f !== "className").map(k=> {
-			paginationOption[k] = this.props[k];
+			if(k==="paginationStyle"){
+				paginationOption['style'] = this.props[k];
+			}
+			else if(k==="paginationClassName"){
+				paginationOption['className'] = this.props[k];
+			}
+			else {
+				paginationOption[k] = this.props[k];
+			}
 		});
 		if (this.props.showIndex) {
 			dataTableOption.columns = [{

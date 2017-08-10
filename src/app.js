@@ -122,6 +122,7 @@ class DataTableWithPaginationDemo extends React.PureComponent{
 		return (
 			<div>
 				<DataTableWithPagination dataSource={this.state.dataSource}
+										 dataTableClassName="abc"
 										 pageSize={this.state.pageSize}
 										 total={this.dataSource.length}
 										 columns={[{
