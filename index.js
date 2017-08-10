@@ -1,5 +1,3 @@
-exports.default = {
-	DataTable: require('./components/DataTable'),
-	Pagination: require('./components/Pagination'),
-	DataTableWithPagination: require('./components/DataTableWithPagination')
-};
+exports.DataTable=require('./components/DataTable').default;
+exports.Pagination=require('./components/Pagination').default;
+exports.DataTableWithPagination=require('./components/DataTableWithPagination').default;
