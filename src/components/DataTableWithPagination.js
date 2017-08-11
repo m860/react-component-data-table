@@ -19,19 +19,12 @@ export default class DataTableWithPagination extends PureComponent {
 	 * @property {?Boolean} showIndex [ true ] - 是否显示索引列
 	 * */
 	static propTypes = {
+		...DataTable.propTypes,
+		...Pagination.propTypes,
 		style: PropTypes.object,
 		className: PropTypes.any,
-		columns: DataTable.propTypes.columns,
-		dataSource: DataTable.propTypes.dataSource,
-		renderDataEmpty: DataTable.propTypes.renderDataEmpty,
 		dataTableStyle: DataTable.propTypes.style,
 		dataTableClassName: DataTable.propTypes.className,
-		startPageNumber: Pagination.propTypes.startPageNumber,
-		pageIndex: Pagination.propTypes.pageIndex,
-		pageSize: Pagination.propTypes.pageSize,
-		onPageChange: Pagination.propTypes.onPageChange,
-		total: Pagination.propTypes.total,
-		displayPageCount: Pagination.propTypes.displayPageCount,
 		paginationStyle: Pagination.propTypes.style,
 		paginationClassName: Pagination.propTypes.className,
 		showIndex: PropTypes.bool

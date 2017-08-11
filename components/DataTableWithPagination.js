@@ -89,13 +89,25 @@ var DataTableWithPagination = function (_PureComponent) {
 			dataTablePropKeys.filter(function (f) {
 				return f !== "style" || f !== "className";
 			}).forEach(function (k) {
-				dataTableOption[k] = _this2.props[k];
+				if (k === "dataTableStyle") {
+					dataTableOption['style'] = _this2.props[k];
+				} else if (k === "dataTableClassName") {
+					dataTableOption['className'] = _this2.props[k];
+				} else {
+					dataTableOption[k] = _this2.props[k];
+				}
 			});
 			var paginationOption = {};
 			paginationPropKeys.filter(function (f) {
 				return f !== "style" || f !== "className";
 			}).map(function (k) {
-				paginationOption[k] = _this2.props[k];
+				if (k === "paginationStyle") {
+					paginationOption['style'] = _this2.props[k];
+				} else if (k === "paginationClassName") {
+					paginationOption['className'] = _this2.props[k];
+				} else {
+					paginationOption[k] = _this2.props[k];
+				}
 			});
 			if (this.props.showIndex) {
 				dataTableOption.columns = [{
@@ -118,24 +130,15 @@ var DataTableWithPagination = function (_PureComponent) {
 	return DataTableWithPagination;
 }(_react.PureComponent);
 
-DataTableWithPagination.propTypes = {
+DataTableWithPagination.propTypes = _extends({}, _DataTable2.default.propTypes, _Pagination2.default.propTypes, {
 	style: _propTypes2.default.object,
 	className: _propTypes2.default.any,
-	columns: _DataTable2.default.propTypes.columns,
-	dataSource: _DataTable2.default.propTypes.dataSource,
-	renderDataEmpty: _DataTable2.default.propTypes.renderDataEmpty,
 	dataTableStyle: _DataTable2.default.propTypes.style,
 	dataTableClassName: _DataTable2.default.propTypes.className,
-	startPageNumber: _Pagination2.default.propTypes.startPageNumber,
-	pageIndex: _Pagination2.default.propTypes.pageIndex,
-	pageSize: _Pagination2.default.propTypes.pageSize,
-	onPageChange: _Pagination2.default.propTypes.onPageChange,
-	total: _Pagination2.default.propTypes.total,
-	displayPageCount: _Pagination2.default.propTypes.displayPageCount,
 	paginationStyle: _Pagination2.default.propTypes.style,
 	paginationClassName: _Pagination2.default.propTypes.className,
 	showIndex: _propTypes2.default.bool
-};
+});
 DataTableWithPagination.defaultProps = {
 	showIndex: true
 };
