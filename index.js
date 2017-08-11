@@ -1,3 +1,5 @@
-exports.DataTable=require('./components/DataTable').default;
-exports.Pagination=require('./components/Pagination').default;
-exports.DataTableWithPagination=require('./components/DataTableWithPagination').default;
+module.exports={
+	DataTable:require('./components/DataTable').default,
+	Pagination:require('./components/Pagination').default,
+	DataTableWithPagination:require('./components/DataTableWithPagination').default
+};
