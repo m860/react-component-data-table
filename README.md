@@ -35,7 +35,8 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 -   [x] Pagination
 -   [x] Pagination - 自定义上下页翻页样式
 -   [ ] Pagination - 自定义页码样式
--   [x] DataTableWithPagination
+-   [ ] Pagination - 实现refresh
+-   [x] DataTableWithPagination
 -   [x] DataTableWithPagination 添加索引显示
 
 # API
