@@ -50,6 +50,14 @@ export default class DataTableWithPagination extends PureComponent {
 		return localRowIndex+1;
 	}
 
+	/**
+	 * 刷新当前页数据
+	 * @return {void}
+	 * */
+	refresh():void{
+		this.refs['pagination'].refresh();
+	}
+
 	render() {
 		const dataTablePropKeys = Object.keys(DataTable.propTypes).concat(["dataTableStyle", "dataTableClassName"]);
 		const paginationPropKeys = Object.keys(Pagination.propTypes).concat(["paginationStyle", "paginationClassName"]);

@@ -45,18 +45,18 @@ export default class Pagination extends PureComponent {
 		style: PropTypes.object,
 		className: PropTypes.any,
 		displayPageCount: PropTypes.number,
-		renderNextPage:PropTypes.func,
-		renderPrevPage:PropTypes.func,
+		renderNextPage: PropTypes.func,
+		renderPrevPage: PropTypes.func,
 	};
 	static defaultProps = {
 		startPageNumber: 0,
 		pageIndex: 0,
 		pageSize: 10,
-		onPageChange:()=>null,
+		onPageChange: ()=>null,
 		className: "pagination",
 		displayPageCount: 5,
-		renderNextPage:()=>(">"),
-		renderPrevPage:()=>("<")
+		renderNextPage: ()=>(">"),
+		renderPrevPage: ()=>("<")
 	};
 
 	constructor(props) {
@@ -101,6 +101,14 @@ export default class Pagination extends PureComponent {
 	 * */
 	get startPageNumber() {
 		return this.state.startPageNumber;
+	}
+
+	/**
+	 * 刷新当前页数据
+	 * @return {void}
+	 * */
+	refresh():void {
+		this.props.onPageChange(Object.assign({}, this.state));
 	}
 
 	render() {

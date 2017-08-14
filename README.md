@@ -31,13 +31,14 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 
 ## TODO
 
-- [x] DataTable
-- [x] Pagination
-- [x] Pagination - 自定义上下页翻页样式
-- [ ] Pagination - 自定义页码样式
-- [ ] Pagination - 实现refresh
-- [x] DataTableWithPagination
-- [x] DataTableWithPagination 添加索引显示
+-   [x] DataTable
+-   [x] Pagination
+-   [x] Pagination - 自定义上下页翻页样式
+-   [ ] Pagination - 自定义页码样式
+-   [x] Pagination - 实现refresh
+-   [x] DataTableWithPagination
+-   [x] DataTableWithPagination - 添加索引显示
+-   [x] DataTableWithPagination - 实现refresh
 
 # API
 
@@ -156,6 +157,12 @@ render(){
 
 Returns **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 全局数据索引
 
+### refresh
+
+刷新当前页数据
+
+Returns **void** 
+
 ### propTypes
 
 [...DataTable.propTypes](#datatableproptypes)
@@ -220,6 +227,12 @@ _从1开始分页_
 ### startPageNumber
 
 起始分页页码
+
+### refresh
+
+刷新当前页数据
+
+Returns **void** 
 
 ### propTypes
 

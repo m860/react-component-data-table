@@ -78,6 +78,17 @@ var DataTableWithPagination = function (_PureComponent) {
 			}
 			return localRowIndex + 1;
 		}
+
+		/**
+   * 刷新当前页数据
+   * @return {void}
+   * */
+
+	}, {
+		key: "refresh",
+		value: function refresh() {
+			this.refs['pagination'].refresh();
+		}
 	}, {
 		key: "render",
 		value: function render() {

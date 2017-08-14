@@ -82,6 +82,17 @@ var Pagination = function (_PureComponent) {
 
 
 	_createClass(Pagination, [{
+		key: "refresh",
+
+
+		/**
+   * 刷新当前页数据
+   * @return {void}
+   * */
+		value: function refresh() {
+			this.props.onPageChange(Object.assign({}, this.state));
+		}
+	}, {
 		key: "render",
 		value: function render() {
 			var _this2 = this;
