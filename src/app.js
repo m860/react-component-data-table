@@ -121,7 +121,11 @@ class DataTableWithPaginationDemo extends React.PureComponent{
 	render(){
 		return (
 			<div>
-				<DataTableWithPagination dataSource={this.state.dataSource}
+				<button type="button" onClick={()=>{
+					this.refs['dt'].refresh();
+				}}>refresh</button>
+				<DataTableWithPagination dataSource={[]}
+										 renderDataEmpty={()=>''}
 										 dataTableClassName="abc"
 										 pageSize={this.state.pageSize}
 										 total={this.dataSource.length}
@@ -139,6 +143,7 @@ class DataTableWithPaginationDemo extends React.PureComponent{
 										 	});
 										 	this.setState(state);
 										 }}
+										 ref="dt"
 										 pageIndex={this.state.pageIndex}></DataTableWithPagination>
 			</div>
 		);

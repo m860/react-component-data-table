@@ -4,6 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+var LiveReloadPlugin = require('webpack-livereload-plugin')
 
 var isProduction = function () {
 	return process.env.NODE_ENV === 'production';
@@ -28,8 +29,8 @@ var plugins = [
 	//package vendor libs
 	// new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
 	new webpack.optimize.CommonsChunkPlugin({
-		name:"vendor"
-		,filename:"vendor.bundle.js"
+		name: "vendor"
+		, filename: "vendor.bundle.js"
 	})
 	//global module
 	// , new webpack.ProvidePlugin({
@@ -50,6 +51,8 @@ var plugins = [
 		template: './src/index.html',
 		inject: false
 	})
+	, new LiveReloadPlugin()
+	, new webpack.HotModuleReplacementPlugin()
 
 ];
 if (isProduction()) {
@@ -86,7 +89,7 @@ module.exports = {
 			},
 			{
 				test: /\.(jsx|js)?$/
-				,exclude: /(node_modules|bower_components)/
+				, exclude: /(node_modules|bower_components)/
 				// 'babel-loader' is also a legal name to reference
 				//loaders: ["babel-loader?presets[]=es2016,presets[]=react", "eslint-loader?{rules:{semi:0}}"]
 				, loader: "babel-loader"
@@ -102,10 +105,10 @@ module.exports = {
 			}, {
 				test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 				loader: "url-loader?limit=10000&mimetype=application/font-woff"
-			},{
+			}, {
 				test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 				loader: "file-loader"
-			},{
+			}, {
 				test: /\.(ogg|mp3)$/,
 				loader: "file-loader"
 			}
@@ -129,8 +132,7 @@ module.exports = {
 	}
 	, resolve: {
 		//设置别名
-		alias: {
-		}
+		alias: {}
 	}
 	, plugins: plugins
 };
