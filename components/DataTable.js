@@ -14,6 +14,10 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _classnames = require("classnames");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -96,15 +100,38 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DataTable = function (_PureComponent) {
 	_inherits(DataTable, _PureComponent);
 
-	function DataTable() {
+	/**
+  * @property {Array<Object>} columns
+  * @property {String} columns[].name
+  * @property {?String} columns[].className
+  * @property {?Object} columns[].style
+  * @property {Function} columns[].render
+  * @property {?Array} dataSource [ [] ]
+  * @property {?Object} style
+  * @property {?String} className [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
+  * @property {?Function} renderDataEmpty [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
+  * @property {?Boolean} fixedHead [false] - 是否固定head
+  * */
+	function DataTable(props) {
 		_classCallCheck(this, DataTable);
 
-		return _possibleConstructorReturn(this, (DataTable.__proto__ || Object.getPrototypeOf(DataTable)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (DataTable.__proto__ || Object.getPrototypeOf(DataTable)).call(this, props));
+
+		_this.state = {
+			bodyHeight: 0
+		};
+		return _this;
 	}
 
 	_createClass(DataTable, [{
-		key: "_renderDataSource",
-
+		key: "updateBodyHeight",
+		value: function updateBodyHeight() {
+			if (this.props.fixedHead) {
+				this.setState(Object.assign({}, this.state, {
+					bodyHeight: this.parentHeight - this.tableHeadHeight
+				}));
+			}
+		}
 
 		/**
    * @private
@@ -112,22 +139,8 @@ var DataTable = function (_PureComponent) {
    * render data source
    * */
 
-		/**
-   * @property {Array<Object>} columns
-   * @property {String} columns[].name
-   * @property {?String} columns[].className
-   * @property {?Object} columns[].style
-   * @property {Function} columns[].render
-   *
-   * @property {?Array} dataSource [ [] ]
-   *
-   * @property {?Object} style
-   *
-   * @property {?String} className [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
-   *
-   * @property {?Function} renderDataEmpty [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
-   *
-   * */
+	}, {
+		key: "_renderDataSource",
 		value: function _renderDataSource() {
 			var _this2 = this;
 
@@ -155,10 +168,13 @@ var DataTable = function (_PureComponent) {
 		value: function render() {
 			return _react2.default.createElement(
 				"table",
-				{ className: this.props.className, style: this.props.style },
+				{
+					ref: "table",
+					className: (0, _classnames2.default)('data-table', this.props.fixedHead && "data-table-fixed-head", this.props.className),
+					style: this.props.style },
 				_react2.default.createElement(
 					"thead",
-					null,
+					{ ref: "thead" },
 					_react2.default.createElement(
 						"tr",
 						null,
@@ -173,10 +189,56 @@ var DataTable = function (_PureComponent) {
 				),
 				_react2.default.createElement(
 					"tbody",
-					null,
+					{ style: this.props.fixedHead ? { height: this.state.bodyHeight } : {} },
 					this._renderDataSource()
 				)
 			);
+		}
+	}, {
+		key: "componentDidMount",
+		value: function componentDidMount() {
+			this.updateBodyHeight();
+		}
+	}, {
+		key: "componentDidUpdate",
+		value: function componentDidUpdate() {
+			this.updateBodyHeight();
+		}
+	}, {
+		key: "parentStyle",
+		get: function get() {
+			var table = this.refs['table'];
+			if (table) {
+				var parent = table.parentNode;
+				if (parent) {
+					return window.getComputedStyle(parent);
+				}
+			}
+			return null;
+		}
+	}, {
+		key: "parentHeight",
+		get: function get() {
+			if (this.parentStyle) {
+				var height = parseFloat(this.parentStyle.height);
+				if (!isNaN(height)) {
+					return height;
+				}
+			}
+			return 0;
+		}
+	}, {
+		key: "tableHeadHeight",
+		get: function get() {
+			var thead = this.refs['thead'];
+			if (thead) {
+				var style = window.getComputedStyle(thead);
+				var height = parseFloat(style.height);
+				if (!isNaN(height)) {
+					return height;
+				}
+			}
+			return 0;
 		}
 	}]);
 
@@ -193,14 +255,12 @@ DataTable.propTypes = {
 	dataSource: _propTypes2.default.array,
 	style: _propTypes2.default.object,
 	className: _propTypes2.default.any,
-	renderDataEmpty: _propTypes2.default.func
+	renderDataEmpty: _propTypes2.default.func,
+	fixedHead: _propTypes2.default.bool
 };
 DataTable.defaultProps = {
 	dataSource: [],
-	className: 'data-table',
-	style: {
-		width: "100%"
-	},
+	fixedHead: false,
 	renderDataEmpty: function renderDataEmpty(definedColumn) {
 		return _react2.default.createElement(
 			"tr",

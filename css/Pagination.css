@@ -5,20 +5,21 @@
   padding: 0;
   user-select: none; }
   .pagination li {
-    padding: 8px 12px;
-    border-radius: 4px;
-    list-style: none; }
+    list-style: none;
+    display: flex;
+    align-items: center; }
     .pagination li a {
-      color: black;
+      color: #5f6062;
       outline: none;
-      text-decoration: none; }
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      display: block; }
   .pagination li.disabled {
-    color: gray;
     cursor: not-allowed; }
     .pagination li.disabled a {
       pointer-events: none;
       color: gray; }
-  .pagination li.cur {
+  .pagination li.cur a {
+    color: white;
     background-color: #ee6e73; }
-    .pagination li.cur a {
-      color: white; }

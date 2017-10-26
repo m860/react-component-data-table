@@ -36,9 +36,8 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 
 ### 1.2.0
 
-- 添加了属性`fixedHead`,是否固定head,默认是不固定.如果为`true`,body的高度有容器的高度计算得出,不需要指定body的高度
-- 调整了默认样式
-
+-   添加了属性`fixedHead`,是否固定head,默认是不固定.如果为`true`,body的高度有容器的高度计算得出,不需要指定body的高度
+-   调整了默认样式
 
 # API
 
@@ -49,6 +48,10 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 **Extends PureComponent**
 
 DataTable - 数据表
+
+**Parameters**
+
+-   `props`  
 
 **Examples**
 
@@ -140,6 +143,7 @@ render(){
 -   `style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 
 -   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
 -   `renderDataEmpty` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
+-   `fixedHead` **[Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** [false] - 是否固定head
 
 ## DataTableWithPagination
 
