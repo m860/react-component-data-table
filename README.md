@@ -26,19 +26,19 @@ $ npm i react-component-data-table --save
 ## Import
 
 ```javascript
+//如果需要自定义样式,请替换为自己的样式文件即可
+import 'react-component-data-table/css/DataTable.css'
+import 'react-component-data-table/css/Pagination.css'
 import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data-table'
 ```
 
-## TODO
+## Change Log
 
--   [x] DataTable
--   [x] Pagination
--   [x] Pagination - 自定义上下页翻页样式
--   [ ] Pagination - 自定义页码样式
--   [x] Pagination - 实现refresh
--   [x] DataTableWithPagination
--   [x] DataTableWithPagination - 添加索引显示
--   [x] DataTableWithPagination - 实现refresh
+### 1.2.0
+
+- 添加了属性`fixedHead`,是否固定head,默认是不固定.如果为`true`,body的高度有容器的高度计算得出,不需要指定body的高度
+- 调整了默认样式
+
 
 # API
 

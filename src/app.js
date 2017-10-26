@@ -6,67 +6,71 @@ import './sass/Pagination.sass'
 import Pagination from './components/Pagination'
 import DataTableWithPagination from './components/DataTableWithPagination'
 
-class SimpleDataTableDemo extends React.PureComponent{
-	render(){
-		const dataSource=[
-			{name:"name1",sex:"male"},
-			{name:"name2",sex:"female"}
+class SimpleDataTableDemo extends React.PureComponent {
+	render() {
+		const dataSource = [
+			{name: "name1", sex: "male"},
+			{name: "name2", sex: "female"}
 		];
-		const columns=[
-			{name:"Name",render:rowData=>rowData['name']},
-			{name:"Sex",render:rowData=>rowData['sex']},
-		];
-		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
-	}
-}
-
-class EmptyDataTableDemo extends React.PureComponent{
-	render(){
-		const dataSource=[];
-		const columns=[
-			{name:"Name",render:rowData=>rowData['name']},
-			{name:"Sex",render:rowData=>rowData['sex']},
+		const columns = [
+			{name: "Name", render: rowData=>rowData['name']},
+			{name: "Sex", render: rowData=>rowData['sex']},
 		];
 		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
 	}
 }
 
-class RadioDataTableDemo extends React.PureComponent{
-	render(){
-		const dataSource=[
-			{name:"name1",sex:"male"},
-			{name:"name2",sex:"female"}
+class EmptyDataTableDemo extends React.PureComponent {
+	render() {
+		const dataSource = [];
+		const columns = [
+			{name: "Name", render: rowData=>rowData['name']},
+			{name: "Sex", render: rowData=>rowData['sex']},
 		];
-		const columns=[
-			{name:"",render:rowData=>{
+		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+	}
+}
+
+class RadioDataTableDemo extends React.PureComponent {
+	render() {
+		const dataSource = [
+			{name: "name1", sex: "male"},
+			{name: "name2", sex: "female"}
+		];
+		const columns = [
+			{
+				name: "", render: rowData=> {
 				return <input type="radio" value={rowData['name']} name="radio-data-table"/>
-			}},
-			{name:"Name",render:rowData=>rowData['name']},
-			{name:"Sex",render:rowData=>rowData['sex']},
+			}
+			},
+			{name: "Name", render: rowData=>rowData['name']},
+			{name: "Sex", render: rowData=>rowData['sex']},
 		];
 		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
 	}
 }
 
-class CheckboxDataTableDemo extends React.PureComponent{
-	render(){
-		const dataSource=[
-			{name:"name1",sex:"male"},
-			{name:"name2",sex:"female"}
+class CheckboxDataTableDemo extends React.PureComponent {
+	render() {
+		const dataSource = [
+			{name: "name1", sex: "male"},
+			{name: "name2", sex: "female"}
 		];
-		const columns=[
-			{name:"",render:rowData=>{
+		const columns = [
+			{
+				name: "", render: rowData=> {
 				return <input type="checkbox" value={rowData['name']}/>
-			}},
-			{name:"Name",render:rowData=>rowData['name']},
-			{name:"Sex",render:rowData=>rowData['sex']},
+			}
+			},
+			{name: "Name", render: rowData=>rowData['name']},
+			{name: "Sex", render: rowData=>rowData['sex']},
 		];
 		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
 	}
 }
 
-class SimplePagination extends React.PureComponent{
-	render(){
+class SimplePagination extends React.PureComponent {
+	render() {
 		return (
 			<div>
 				<Pagination total={100}/>
@@ -75,60 +79,63 @@ class SimplePagination extends React.PureComponent{
 	}
 }
 
-class DataTableWithPaginationDemo extends React.PureComponent{
-	constructor(props){
+class DataTableWithPaginationDemo extends React.PureComponent {
+	constructor(props) {
 		super(props);
-		this.dataSource=[{
-			name:"name",
-			age:1
-		},{
-			name:"name",
-			age:2
-		},{
-			name:"name",
-			age:3
-		},{
-			name:"name",
-			age:4
-		},{
-			name:"name",
-			age:5
-		},{
-			name:"name",
-			age:6
-		},{
-			name:"name",
-			age:7
-		},{
-			name:"name",
-			age:8
-		},{
-			name:"name",
-			age:9
-		},{
-			name:"name",
-			age:10
-		},{
-			name:"name",
-			age:11
+		this.dataSource = [{
+			name: "name",
+			age: 1
+		}, {
+			name: "name",
+			age: 2
+		}, {
+			name: "name",
+			age: 3
+		}, {
+			name: "name",
+			age: 4
+		}, {
+			name: "name",
+			age: 5
+		}, {
+			name: "name",
+			age: 6
+		}, {
+			name: "name",
+			age: 7
+		}, {
+			name: "name",
+			age: 8
+		}, {
+			name: "name",
+			age: 9
+		}, {
+			name: "name",
+			age: 10
+		}, {
+			name: "name",
+			age: 11
 		}];
-		this.state={
-			dataSource:this.dataSource.slice(0,3),
-			pageIndex:0,
-			pageSize:3
+		this.state = {
+			dataSource: this.dataSource.slice(0, 3),
+			pageIndex: 0,
+			pageSize: 3
 		};
 	}
-	render(){
+
+	render() {
 		return (
 			<div>
 				<button type="button" onClick={()=>{
 					this.refs['dt'].refresh();
-				}}>refresh</button>
-				<DataTableWithPagination dataSource={[]}
+				}}>refresh
+				</button>
+				<DataTableWithPagination dataSource={this.state.dataSource}
 										 renderDataEmpty={()=>''}
 										 dataTableClassName="abc"
 										 pageSize={this.state.pageSize}
 										 total={this.dataSource.length}
+										 paginationStyle={{marginTop:5}}
 										 columns={[{
 										 	name:"Name",
 										 	render:rowData=>rowData['name']
@@ -150,6 +157,71 @@ class DataTableWithPaginationDemo extends React.PureComponent{
 	}
 }
 
+class FixedHead extends React.PureComponent {
+	constructor(props) {
+		super(props);
+		this.dataSource = [{
+			name: "name",
+			age: 1
+		}, {
+			name: "name",
+			age: 2
+		}, {
+			name: "name",
+			age: 3
+		}, {
+			name: "name",
+			age: 4
+		}, {
+			name: "name",
+			age: 5
+		}, {
+			name: "name",
+			age: 6
+		}, {
+			name: "name",
+			age: 7
+		}, {
+			name: "name",
+			age: 8
+		}, {
+			name: "name",
+			age: 9
+		}, {
+			name: "name",
+			age: 10
+		}, {
+			name: "name",
+			age: 11
+		}];
+		this.state = {
+			dataSource: this.dataSource.slice(0, 3),
+			pageIndex: 0,
+			pageSize: 3
+		};
+	}
+
+	render() {
+		return (
+			<div
+				style={{height:300}}>
+				<DataTable
+					style={{width:400}}
+					fixedHead={true}
+					dataSource={this.dataSource}
+					renderDataEmpty={()=>''}
+					columns={[{
+						name:"Name",
+						render:rowData=>rowData['name']
+					 },{
+						name:"Age",
+						render:rowData=>rowData['age']
+					 }]}></DataTable>
+			</div>
+		);
+	}
+}
+
 class Example extends Component {
 	render() {
 		return (
@@ -166,6 +238,8 @@ class Example extends Component {
 				<SimplePagination/>
 				<h5>DataTableWithPaginationDemo</h5>
 				<DataTableWithPaginationDemo></DataTableWithPaginationDemo>
+				<h5>Data Table Of Fixed Head</h5>
+				<FixedHead/>
 			</div>
 		);
 	}

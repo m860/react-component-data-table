@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import classnames from 'classnames'
 
 /**
  * DataTable - 数据表
@@ -79,15 +80,11 @@ export default class DataTable extends PureComponent {
 	 * @property {?String} columns[].className
 	 * @property {?Object} columns[].style
 	 * @property {Function} columns[].render
-	 *
 	 * @property {?Array} dataSource [ [] ]
-	 *
 	 * @property {?Object} style
-	 *
 	 * @property {?String} className [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
-	 *
 	 * @property {?Function} renderDataEmpty [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
-	 *
+	 * @property {?Boolean} fixedHead [false] - 是否固定head
 	 * */
 	static propTypes = {
 		columns: PropTypes.arrayOf(PropTypes.shape({
@@ -99,18 +96,66 @@ export default class DataTable extends PureComponent {
 		dataSource: PropTypes.array,
 		style: PropTypes.object,
 		className: PropTypes.any,
-		renderDataEmpty: PropTypes.func
+		renderDataEmpty: PropTypes.func,
+		fixedHead: PropTypes.bool
 	};
 	static defaultProps = {
 		dataSource: [],
-		className: 'data-table',
-		style: {
-			width: "100%"
-		},
+		fixedHead: false,
 		renderDataEmpty: (definedColumn)=>(<tr>
 			<td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td>
 		</tr>)
 	};
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			bodyHeight: 0
+		};
+	}
+
+	get parentStyle() {
+		const table = this.refs['table'];
+		if (table) {
+			const parent = table.parentNode;
+			if (parent) {
+				return window.getComputedStyle(parent);
+			}
+		}
+		return null;
+	}
+
+	get parentHeight() {
+		if (this.parentStyle) {
+			const height = parseFloat(this.parentStyle.height);
+			if (!isNaN(height)) {
+				return height;
+			}
+		}
+		return 0;
+	}
+
+	get tableHeadHeight() {
+		const thead = this.refs['thead'];
+		if (thead) {
+			const style = window.getComputedStyle(thead);
+			const height = parseFloat(style.height);
+			if (!isNaN(height)) {
+				return height;
+			}
+		}
+		return 0;
+	}
+
+	updateBodyHeight() {
+		if (this.props.fixedHead) {
+			this.setState(
+				Object.assign({}, this.state, {
+					bodyHeight: this.parentHeight - this.tableHeadHeight
+				})
+			)
+		}
+	}
 
 	/**
 	 * @private
@@ -138,8 +183,11 @@ export default class DataTable extends PureComponent {
 
 	render() {
 		return (
-			<table className={this.props.className} style={this.props.style}>
-				<thead>
+			<table
+				ref="table"
+				className={classnames('data-table',this.props.fixedHead&&"data-table-fixed-head",this.props.className)}
+				style={this.props.style}>
+				<thead ref="thead">
 				<tr>
 					{this.props.columns.map((column, index)=> {
 						return (
@@ -148,10 +196,18 @@ export default class DataTable extends PureComponent {
 					})}
 				</tr>
 				</thead>
-				<tbody>
+				<tbody style={this.props.fixedHead?{height:this.state.bodyHeight}:{}}>
 				{this._renderDataSource()}
 				</tbody>
 			</table>
 		);
+	}
+
+	componentDidMount() {
+		this.updateBodyHeight();
+	}
+
+	componentDidUpdate() {
+		this.updateBodyHeight();
 	}
 }
