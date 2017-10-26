@@ -34,6 +34,10 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 
 ## Change Log
 
+### 1.2.1
+
+- 优化bodyHeight的计算,当`fixedHead=true`时
+
 ### 1.2.0
 
 -   添加了属性`fixedHead`,是否固定head,默认是不固定.如果为`true`,body的高度有容器的高度计算得出,不需要指定body的高度

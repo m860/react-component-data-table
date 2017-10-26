@@ -149,11 +149,14 @@ export default class DataTable extends PureComponent {
 
 	updateBodyHeight() {
 		if (this.props.fixedHead) {
-			this.setState(
-				Object.assign({}, this.state, {
-					bodyHeight: this.parentHeight - this.tableHeadHeight
-				})
-			)
+			const diff = this.parentHeight - this.tableHeadHeight;
+			if (diff !== this.state.bodyHeight) {
+				this.setState(
+					Object.assign({}, this.state, {
+						bodyHeight: diff
+					})
+				)
+			}
 		}
 	}
 
