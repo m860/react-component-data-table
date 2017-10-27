@@ -37,10 +37,11 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 
 ## Change Log
 
-### 1.2.1
+### 1.3.0
 
 -   优化bodyHeight的计算,当`fixedHead=true`时
 -   调整了部分样式
+-   添加排序
 
 ### 1.2.0
 
@@ -138,6 +139,63 @@ render(){
 }
 ```
 
+_Sort DataTable_
+
+```javascript
+class SortDataTable extends React.PureComponent {
+ 	...
+ 	onSortChange(sort) {
+		if (sort) {
+			let ds = [...this.state.dataSource];
+			ds.sort((a, b)=> {
+				if (sort.type === 'asc') {
+					if (a[sort.field] < b[sort.field]) {
+						return 1;
+					}
+					return 0;
+				}
+				else if (sort.type === 'desc') {
+					if (a[sort.field] > b[sort.field]) {
+						return 1;
+					}
+					return 0;
+				}
+				else {
+					//nothing
+				}
+			});
+			this.setState(
+				Object.assign({}, this.state, {
+					dataSource: ds
+				})
+			)
+		}
+	}
+	render() {
+		return (
+			<div
+				style={{height:300}}>
+				<DataTable
+					dataSource={this.state.dataSource}
+					renderDataEmpty={()=>''}
+					onSortChange={this.onSortChange.bind(this)}
+					columns={[{
+						name:"Name",
+						render:rowData=>rowData['name']
+					 },{
+						name:"Age",
+						render:rowData=>rowData['age'],
+						sort:{
+							field:'age',
+						}
+					 }]}></DataTable>
+			</div>
+		);
+	}
+ 	...
+ }
+```
+
 ### propTypes
 
 **Properties**
@@ -147,11 +205,15 @@ render(){
     -   `columns[].className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
     -   `columns[].style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 
     -   `columns[].render` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 
+    -   `columns[].sort` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 
+        -   `columns[].sort.field` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+        -   `columns[].sort.defaultType` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** value is one of the none,asc,desc
 -   `dataSource` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)?** \[ \[] ]
 -   `style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 
 -   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
 -   `renderDataEmpty` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
 -   `fixedHead` **[Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** [false] - 是否固定head
+-   `onSortChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [()=>null] - 当sort变化时调用
 
 ## DataTableWithPagination
 

@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import classnames from 'classnames'
+import Sort from './Sort'
 
 /**
  * DataTable - 数据表
@@ -72,6 +73,61 @@ import classnames from 'classnames'
  *	}
  * }
  *
+ * @example <caption>Sort DataTable</caption>
+ *
+ *  class SortDataTable extends React.PureComponent {
+ *  	...
+ *  	onSortChange(sort) {
+ *			if (sort) {
+ *				let ds = [...this.state.dataSource];
+ *				ds.sort((a, b)=> {
+ *					if (sort.type === 'asc') {
+ *						if (a[sort.field] < b[sort.field]) {
+ *							return 1;
+ *						}
+ *						return 0;
+ *					}
+ *					else if (sort.type === 'desc') {
+ *						if (a[sort.field] > b[sort.field]) {
+ *							return 1;
+ *						}
+ *						return 0;
+ *					}
+ *					else {
+ *						//nothing
+ *					}
+ *				});
+ *				this.setState(
+ *					Object.assign({}, this.state, {
+ *						dataSource: ds
+ *					})
+ *				)
+ *			}
+ *		}
+ *		render() {
+ *			return (
+ *				<div
+ *					style={{height:300}}>
+ *					<DataTable
+ *						dataSource={this.state.dataSource}
+ *						renderDataEmpty={()=>''}
+ *						onSortChange={this.onSortChange.bind(this)}
+ *						columns={[{
+ *							name:"Name",
+ *							render:rowData=>rowData['name']
+ *						 },{
+ *							name:"Age",
+ *							render:rowData=>rowData['age'],
+ *							sort:{
+ *								field:'age',
+ *							}
+ *						 }]}></DataTable>
+ *				</div>
+ *			);
+ *		}
+ *  	...
+ *  }
+ *
  */
 export default class DataTable extends PureComponent {
 	/**
@@ -80,37 +136,48 @@ export default class DataTable extends PureComponent {
 	 * @property {?String} columns[].className
 	 * @property {?Object} columns[].style
 	 * @property {Function} columns[].render
+	 * @property {?Object} columns[].sort
+	 * @property {String} columns[].sort.field
+	 * @property {?String} columns[].sort.defaultType - value is one of the none,asc,desc
 	 * @property {?Array} dataSource [ [] ]
 	 * @property {?Object} style
 	 * @property {?String} className [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
 	 * @property {?Function} renderDataEmpty [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
 	 * @property {?Boolean} fixedHead [false] - 是否固定head
+	 * @property {?Function} onSortChange [()=>null] - 当sort变化时调用
 	 * */
 	static propTypes = {
 		columns: PropTypes.arrayOf(PropTypes.shape({
 			name: PropTypes.string.isRequired,
 			className: PropTypes.any,
 			style: PropTypes.object,
-			render: PropTypes.func.isRequired
+			render: PropTypes.func.isRequired,
+			sort: PropTypes.shape({
+				field: PropTypes.string.isRequired,
+				defaultType: PropTypes.oneOf(['asc', 'desc', 'none'])
+			})
 		})).isRequired,
 		dataSource: PropTypes.array,
 		style: PropTypes.object,
 		className: PropTypes.any,
 		renderDataEmpty: PropTypes.func,
-		fixedHead: PropTypes.bool
+		fixedHead: PropTypes.bool,
+		onSortChange: PropTypes.func
 	};
 	static defaultProps = {
 		dataSource: [],
 		fixedHead: false,
 		renderDataEmpty: (definedColumn)=>(<tr>
 			<td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td>
-		</tr>)
+		</tr>),
+		onSortChange: ()=>null
 	};
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			bodyHeight: 0
+			bodyHeight: 0,
+			activeSort: null
 		};
 	}
 
@@ -194,7 +261,23 @@ export default class DataTable extends PureComponent {
 				<tr>
 					{this.props.columns.map((column, index)=> {
 						return (
-							<th key={index}>{column.name}</th>
+							<th key={index}>
+								<div>
+									<div>{column.name}</div>
+									<div>{column.sort && <Sort {...column.sort} onChange={type=>{
+										this.setState(
+											Object.assign({},this.state,{
+												activeSort:{
+													...column.sort,
+													type
+												}
+											}),()=>{
+												this.props.onSortChange(this.state.activeSort);
+											}
+										)
+									}}/>}</div>
+								</div>
+							</th>
 						);
 					})}
 				</tr>

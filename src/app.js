@@ -222,6 +222,101 @@ class FixedHead extends React.PureComponent {
 	}
 }
 
+class SortDataTable extends React.PureComponent {
+	constructor(props) {
+		super(props);
+		this.dataSource = [{
+			name: "name",
+			age: 1
+		}, {
+			name: "name",
+			age: 2
+		}, {
+			name: "name",
+			age: 3
+		}, {
+			name: "name",
+			age: 4
+		}, {
+			name: "name",
+			age: 5
+		}, {
+			name: "name",
+			age: 6
+		}, {
+			name: "name",
+			age: 7
+		}, {
+			name: "name",
+			age: 8
+		}, {
+			name: "name",
+			age: 9
+		}, {
+			name: "name",
+			age: 10
+		}, {
+			name: "name",
+			age: 11
+		}];
+		this.state = {
+			dataSource: this.dataSource.slice(0, 3),
+			pageIndex: 0,
+			pageSize: 3
+		};
+	}
+
+	onSortChange(sort) {
+		if (sort) {
+			let ds = [...this.state.dataSource];
+			ds.sort((a, b)=> {
+				if (sort.type === 'asc') {
+					if (a[sort.field] < b[sort.field]) {
+						return 1;
+					}
+					return 0;
+				}
+				else if (sort.type === 'desc') {
+					if (a[sort.field] > b[sort.field]) {
+						return 1;
+					}
+					return 0;
+				}
+				else {
+					//nothing
+				}
+			});
+			this.setState(
+				Object.assign({}, this.state, {
+					dataSource: ds
+				})
+			)
+		}
+	}
+
+	render() {
+		return (
+			<div
+				style={{height:300}}>
+				<DataTable
+					dataSource={this.state.dataSource}
+					renderDataEmpty={()=>''}
+					onSortChange={this.onSortChange.bind(this)}
+					columns={[{
+						name:"Name",
+						render:rowData=>rowData['name']
+					 },{
+						name:"Age",
+						render:rowData=>rowData['age'],
+						sort:{
+							field:'age',
+						}
+					 }]}></DataTable>
+			</div>
+		);
+	}
+}
+
 class Example extends Component {
 	render() {
 		return (
@@ -240,6 +335,8 @@ class Example extends Component {
 				<DataTableWithPaginationDemo></DataTableWithPaginationDemo>
 				<h5>Data Table Of Fixed Head</h5>
 				<FixedHead/>
+				<h5>Sort Data Table</h5>
+				<SortDataTable/>
 			</div>
 		);
 	}

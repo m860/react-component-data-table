@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require("react");
@@ -17,6 +19,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 var _classnames = require("classnames");
 
 var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Sort = require("./Sort");
+
+var _Sort2 = _interopRequireDefault(_Sort);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -96,6 +102,61 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  *	}
  * }
  *
+ * @example <caption>Sort DataTable</caption>
+ *
+ *  class SortDataTable extends React.PureComponent {
+ *  	...
+ *  	onSortChange(sort) {
+ *			if (sort) {
+ *				let ds = [...this.state.dataSource];
+ *				ds.sort((a, b)=> {
+ *					if (sort.type === 'asc') {
+ *						if (a[sort.field] < b[sort.field]) {
+ *							return 1;
+ *						}
+ *						return 0;
+ *					}
+ *					else if (sort.type === 'desc') {
+ *						if (a[sort.field] > b[sort.field]) {
+ *							return 1;
+ *						}
+ *						return 0;
+ *					}
+ *					else {
+ *						//nothing
+ *					}
+ *				});
+ *				this.setState(
+ *					Object.assign({}, this.state, {
+ *						dataSource: ds
+ *					})
+ *				)
+ *			}
+ *		}
+ *		render() {
+ *			return (
+ *				<div
+ *					style={{height:300}}>
+ *					<DataTable
+ *						dataSource={this.state.dataSource}
+ *						renderDataEmpty={()=>''}
+ *						onSortChange={this.onSortChange.bind(this)}
+ *						columns={[{
+ *							name:"Name",
+ *							render:rowData=>rowData['name']
+ *						 },{
+ *							name:"Age",
+ *							render:rowData=>rowData['age'],
+ *							sort:{
+ *								field:'age',
+ *							}
+ *						 }]}></DataTable>
+ *				</div>
+ *			);
+ *		}
+ *  	...
+ *  }
+ *
  */
 var DataTable = function (_PureComponent) {
 	_inherits(DataTable, _PureComponent);
@@ -106,11 +167,15 @@ var DataTable = function (_PureComponent) {
   * @property {?String} columns[].className
   * @property {?Object} columns[].style
   * @property {Function} columns[].render
+  * @property {?Object} columns[].sort
+  * @property {String} columns[].sort.field
+  * @property {?String} columns[].sort.defaultType - value is one of the none,asc,desc
   * @property {?Array} dataSource [ [] ]
   * @property {?Object} style
   * @property {?String} className [ data-table ] - data-table是DataTable的默认className,样式定义在/css/DataTable.css.如果要使用默认样式需要引用默认的样式文件`import 'css/DataTable.css'`
   * @property {?Function} renderDataEmpty [ (definedColumn)=>(<tr><td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td></tr>) ]
   * @property {?Boolean} fixedHead [false] - 是否固定head
+  * @property {?Function} onSortChange [()=>null] - 当sort变化时调用
   * */
 	function DataTable(props) {
 		_classCallCheck(this, DataTable);
@@ -118,7 +183,8 @@ var DataTable = function (_PureComponent) {
 		var _this = _possibleConstructorReturn(this, (DataTable.__proto__ || Object.getPrototypeOf(DataTable)).call(this, props));
 
 		_this.state = {
-			bodyHeight: 0
+			bodyHeight: 0,
+			activeSort: null
 		};
 		return _this;
 	}
@@ -169,6 +235,8 @@ var DataTable = function (_PureComponent) {
 	}, {
 		key: "render",
 		value: function render() {
+			var _this3 = this;
+
 			return _react2.default.createElement(
 				"table",
 				{
@@ -185,7 +253,28 @@ var DataTable = function (_PureComponent) {
 							return _react2.default.createElement(
 								"th",
 								{ key: index },
-								column.name
+								_react2.default.createElement(
+									"div",
+									null,
+									_react2.default.createElement(
+										"div",
+										null,
+										column.name
+									),
+									_react2.default.createElement(
+										"div",
+										null,
+										column.sort && _react2.default.createElement(_Sort2.default, _extends({}, column.sort, { onChange: function onChange(type) {
+												_this3.setState(Object.assign({}, _this3.state, {
+													activeSort: _extends({}, column.sort, {
+														type: type
+													})
+												}), function () {
+													_this3.props.onSortChange(_this3.state.activeSort);
+												});
+											} }))
+									)
+								)
 							);
 						})
 					)
@@ -253,13 +342,18 @@ DataTable.propTypes = {
 		name: _propTypes2.default.string.isRequired,
 		className: _propTypes2.default.any,
 		style: _propTypes2.default.object,
-		render: _propTypes2.default.func.isRequired
+		render: _propTypes2.default.func.isRequired,
+		sort: _propTypes2.default.shape({
+			field: _propTypes2.default.string.isRequired,
+			defaultType: _propTypes2.default.oneOf(['asc', 'desc', 'none'])
+		})
 	})).isRequired,
 	dataSource: _propTypes2.default.array,
 	style: _propTypes2.default.object,
 	className: _propTypes2.default.any,
 	renderDataEmpty: _propTypes2.default.func,
-	fixedHead: _propTypes2.default.bool
+	fixedHead: _propTypes2.default.bool,
+	onSortChange: _propTypes2.default.func
 };
 DataTable.defaultProps = {
 	dataSource: [],
@@ -274,6 +368,9 @@ DataTable.defaultProps = {
 				"NO DATA"
 			)
 		);
+	},
+	onSortChange: function onSortChange() {
+		return null;
 	}
 };
 exports.default = DataTable;
