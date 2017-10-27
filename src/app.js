@@ -1,8 +1,8 @@
 import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
 import DataTable from './components/DataTable'
-import './sass/DataTable.sass'
-import './sass/Pagination.sass'
+import './assets/sass/DataTable.sass'
+import './assets/sass/Pagination.sass'
 import Pagination from './components/Pagination'
 import DataTableWithPagination from './components/DataTableWithPagination'
 

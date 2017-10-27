@@ -31,8 +31,7 @@ $ npm i react-component-data-table --save
 
 ```javascript
 //如果需要自定义样式,请替换为自己的样式文件即可
-import 'react-component-data-table/css/DataTable.css'
-import 'react-component-data-table/css/Pagination.css'
+import 'react-component-data-table/asstes/css/DataTable.css'
 import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data-table'
 ```
 
@@ -40,7 +39,8 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 
 ### 1.2.1
 
-- 优化bodyHeight的计算,当`fixedHead=true`时
+-   优化bodyHeight的计算,当`fixedHead=true`时
+-   调整了部分样式
 
 ### 1.2.0
 

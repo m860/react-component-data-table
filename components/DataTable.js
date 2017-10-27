@@ -127,9 +127,12 @@ var DataTable = function (_PureComponent) {
 		key: "updateBodyHeight",
 		value: function updateBodyHeight() {
 			if (this.props.fixedHead) {
-				this.setState(Object.assign({}, this.state, {
-					bodyHeight: this.parentHeight - this.tableHeadHeight
-				}));
+				var diff = this.parentHeight - this.tableHeadHeight;
+				if (diff !== this.state.bodyHeight) {
+					this.setState(Object.assign({}, this.state, {
+						bodyHeight: diff
+					}));
+				}
 			}
 		}
 

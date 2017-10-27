@@ -1,3 +1,30 @@
+.pagination {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  user-select: none; }
+  .pagination li {
+    list-style: none;
+    display: flex;
+    align-items: center; }
+    .pagination li a {
+      color: #5f6062;
+      outline: none;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      display: block; }
+  .pagination li.disabled {
+    cursor: not-allowed;
+    opacity: 0.5; }
+    .pagination li.disabled a {
+      pointer-events: none;
+      color: gray; }
+  .pagination li.cur a {
+    color: white;
+    background-color: #ee6e73; }
+
 .data-table {
   border-radius: 5px;
   background-color: white;

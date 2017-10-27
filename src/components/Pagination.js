@@ -55,8 +55,8 @@ export default class Pagination extends PureComponent {
 		onPageChange: ()=>null,
 		className: "pagination",
 		displayPageCount: 5,
-		renderNextPage: ()=>(">"),
-		renderPrevPage: ()=>("<")
+		renderNextPage: ()=><img style={{width:20,height:20,transform:'rotate(180deg)'}} src={require('../assets/img/angle-left.svg')}/>,
+		renderPrevPage: ()=><img style={{width:20,height:20}} src={require('../assets/img/angle-left.svg')}/>
 	};
 
 	constructor(props) {
@@ -107,7 +107,7 @@ export default class Pagination extends PureComponent {
 	 * 刷新当前页数据
 	 * @return {void}
 	 * */
-	refresh():void {
+	refresh(): void {
 		this.props.onPageChange(Object.assign({}, this.state));
 	}
 

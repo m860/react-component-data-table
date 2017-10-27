@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --verbose",
     "dev": "export NODE_ENV=development && webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
-    "build": "./build",
+    "build": "./build.sh",
     "publish": "npm publish --access public",
     "win-dev": "set NODE_ENV=development&&webpack-dev-server --host 0.0.0.0 --inline --progress --colors --port 3000 --content-base src/",
     "win-build": "set NODE_ENV=production&&webpack --progress --profile --colors"

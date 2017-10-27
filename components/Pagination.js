@@ -270,10 +270,10 @@ Pagination.defaultProps = {
 	className: "pagination",
 	displayPageCount: 5,
 	renderNextPage: function renderNextPage() {
-		return ">";
+		return _react2.default.createElement("img", { style: { width: 20, height: 20, transform: 'rotate(180deg)' }, src: require('../assets/img/angle-left.svg') });
 	},
 	renderPrevPage: function renderPrevPage() {
-		return "<";
+		return _react2.default.createElement("img", { style: { width: 20, height: 20 }, src: require('../assets/img/angle-left.svg') });
 	}
 };
 exports.default = Pagination;
