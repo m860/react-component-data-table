@@ -11,11 +11,15 @@
 
 ## Screen Shot
 
-<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/datatable.png"/>
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/screenshot/data-table-radio-and-checkbox.png"/>
 
-<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/pagination.gif"/>
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/screenshot/data-table-empty.png"/>
 
-<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/datatablewithpagination.gif"/>
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/screenshot/data-table-pagination.gif"/>
+
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/screenshot/data-table-pagination2.gif"/>
+
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/screenshot/data-table-fixed-head.gif"/>
 
 ## Install
 
