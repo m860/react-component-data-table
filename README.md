@@ -21,6 +21,8 @@
 
 <img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/screenshot/data-table-fixed-head.gif"/>
 
+<img src="https://raw.githubusercontent.com/m860/react-component-data-table/master/src/screenshot/data-table-sort.gif"/>
+
 ## Install
 
 ```shell
