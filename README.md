@@ -256,7 +256,7 @@ Returns **void**
 -   `onPageChange` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ ()=>null ] - 分页事件监听
 -   `total` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 总记录数
 -   `style` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 样式
--   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** [ pagination ] - css class样式,样式定义在`css/Pagination.css`
--   `displayPageCount` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [ 5 ] - 最多可以显示多少页面
--   `renderNextPage` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ ()=>(">") ] - `>`按钮样式
--   `renderPrevPage` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [ ()=>("<") ] - `<`按钮样式
+-   `className` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** [pagination] - css class样式,样式定义在`css/Pagination.css`
+-   `displayPageCount` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?** [5] - 最多可以显示多少页面
+-   `renderNextPage` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [()=>(<img style={{width:20,height:20,transform:'rotate(180deg)'}} src={require('../assets/img/angle-left.svg')}/>)] - `>`按钮样式
+-   `renderPrevPage` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)?** [()=>(<img style={{width:20,height:20}} src={require('../assets/img/angle-left.svg')}/>)] - `<`按钮样式

@@ -57,10 +57,10 @@ var Pagination = function (_PureComponent) {
   * @property {?Function} onPageChange [ ()=>null ] - 分页事件监听
   * @property {Number} total - 总记录数
   * @property {?Object} style - 样式
-  * @property {String} className [ pagination ] - css class样式,样式定义在`css/Pagination.css`
-  * @property {?Number} displayPageCount [ 5 ] - 最多可以显示多少页面
-  * @property {?Function} renderNextPage [ ()=>(">") ] - `>`按钮样式
-  * @property {?Function} renderPrevPage [ ()=>("<") ] - `<`按钮样式
+  * @property {String} className [pagination] - css class样式,样式定义在`css/Pagination.css`
+  * @property {?Number} displayPageCount [5] - 最多可以显示多少页面
+  * @property {?Function} renderNextPage [()=>(<img style={{width:20,height:20,transform:'rotate(180deg)'}} src={require('../assets/img/angle-left.svg')}/>)] - `>`按钮样式
+  * @property {?Function} renderPrevPage [()=>(<img style={{width:20,height:20}} src={require('../assets/img/angle-left.svg')}/>)] - `<`按钮样式
   * */
 	function Pagination(props) {
 		_classCallCheck(this, Pagination);
