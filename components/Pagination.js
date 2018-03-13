@@ -14,10 +14,6 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = require("classnames");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -138,7 +134,7 @@ var Pagination = function (_PureComponent) {
 				{ className: this.props.className, style: this.props.style },
 				_react2.default.createElement(
 					"li",
-					{ className: (0, _classnames2.default)(disabledPrevButton ? "disabled" : '') },
+					{ className: disabledPrevButton ? "disabled" : '' },
 					_react2.default.createElement(
 						"a",
 						{ onClick: function onClick() {
@@ -162,7 +158,7 @@ var Pagination = function (_PureComponent) {
 					return _react2.default.createElement(
 						"li",
 						{
-							className: (0, _classnames2.default)(_this2.state.pageIndex === num ? "cur" : ''),
+							className: _this2.state.pageIndex === num ? "cur" : '',
 							key: num },
 						_react2.default.createElement(
 							"a",
@@ -185,7 +181,7 @@ var Pagination = function (_PureComponent) {
 				),
 				_react2.default.createElement(
 					"li",
-					{ className: (0, _classnames2.default)(disabledNextButton ? "disabled" : "") },
+					{ className: disabledNextButton ? "disabled" : "" },
 					_react2.default.createElement(
 						"a",
 						{ onClick: function onClick() {
@@ -267,10 +263,10 @@ Pagination.defaultProps = {
 	onPageChange: function onPageChange() {
 		return null;
 	},
-	className: "pagination",
 	displayPageCount: 5,
 	renderNextPage: function renderNextPage() {
-		return _react2.default.createElement("img", { style: { width: 20, height: 20, transform: 'rotate(180deg)' }, src: require('../assets/img/angle-left.svg') });
+		return _react2.default.createElement("img", { style: { width: 20, height: 20, transform: 'rotate(180deg)' },
+			src: require('../assets/img/angle-left.svg') });
 	},
 	renderPrevPage: function renderPrevPage() {
 		return _react2.default.createElement("img", { style: { width: 20, height: 20 }, src: require('../assets/img/angle-left.svg') });

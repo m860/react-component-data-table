@@ -1,8 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
 import DataTable from './components/DataTable'
-import './assets/sass/DataTable.sass'
-import './assets/sass/Pagination.sass'
+import './assets/sass/data-table.sass'
 import Pagination from './components/Pagination'
 import DataTableWithPagination from './components/DataTableWithPagination'
 
@@ -13,10 +12,10 @@ class SimpleDataTableDemo extends React.PureComponent {
 			{name: "name2", sex: "female"}
 		];
 		const columns = [
-			{name: "Name", render: rowData=>rowData['name']},
-			{name: "Sex", render: rowData=>rowData['sex']},
+			{name: "Name", render: rowData => rowData['name']},
+			{name: "Sex", render: rowData => rowData['sex']},
 		];
-		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+		return <DataTable columns={columns} dataSource={dataSource} className="data-table"></DataTable>
 	}
 }
 
@@ -24,10 +23,10 @@ class EmptyDataTableDemo extends React.PureComponent {
 	render() {
 		const dataSource = [];
 		const columns = [
-			{name: "Name", render: rowData=>rowData['name']},
-			{name: "Sex", render: rowData=>rowData['sex']},
+			{name: "Name", render: rowData => rowData['name']},
+			{name: "Sex", render: rowData => rowData['sex']},
 		];
-		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+		return <DataTable columns={columns} dataSource={dataSource} className="data-table"></DataTable>
 	}
 }
 
@@ -39,14 +38,14 @@ class RadioDataTableDemo extends React.PureComponent {
 		];
 		const columns = [
 			{
-				name: "", render: rowData=> {
-				return <input type="radio" value={rowData['name']} name="radio-data-table"/>
-			}
+				name: "", render: rowData => {
+					return <input type="radio" value={rowData['name']} name="radio-data-table"/>
+				}
 			},
-			{name: "Name", render: rowData=>rowData['name']},
-			{name: "Sex", render: rowData=>rowData['sex']},
+			{name: "Name", render: rowData => rowData['name']},
+			{name: "Sex", render: rowData => rowData['sex']},
 		];
-		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+		return <DataTable columns={columns} dataSource={dataSource} className="data-table"></DataTable>
 	}
 }
 
@@ -58,14 +57,14 @@ class CheckboxDataTableDemo extends React.PureComponent {
 		];
 		const columns = [
 			{
-				name: "", render: rowData=> {
-				return <input type="checkbox" value={rowData['name']}/>
-			}
+				name: "", render: rowData => {
+					return <input type="checkbox" value={rowData['name']}/>
+				}
 			},
-			{name: "Name", render: rowData=>rowData['name']},
-			{name: "Sex", render: rowData=>rowData['sex']},
+			{name: "Name", render: rowData => rowData['name']},
+			{name: "Sex", render: rowData => rowData['sex']},
 		];
-		return <DataTable columns={columns} dataSource={dataSource}></DataTable>
+		return <DataTable columns={columns} dataSource={dataSource} className="data-table"></DataTable>
 	}
 }
 
@@ -73,7 +72,7 @@ class SimplePagination extends React.PureComponent {
 	render() {
 		return (
 			<div>
-				<Pagination total={100}/>
+				<Pagination total={100} className="pagination"/>
 			</div>
 		);
 	}
@@ -126,29 +125,29 @@ class DataTableWithPaginationDemo extends React.PureComponent {
 	render() {
 		return (
 			<div>
-				<button type="button" onClick={()=>{
+				<button type="button" onClick={() => {
 					this.refs['dt'].refresh();
 				}}>refresh
 				</button>
 				<DataTableWithPagination dataSource={this.state.dataSource}
-										 renderDataEmpty={()=>''}
+										 renderDataEmpty={() => ''}
 										 dataTableClassName="abc"
 										 pageSize={this.state.pageSize}
 										 total={this.dataSource.length}
-										 paginationStyle={{marginTop:5}}
+										 paginationStyle={{marginTop: 5}}
 										 columns={[{
-										 	name:"Name",
-										 	render:rowData=>rowData['name']
-										 },{
-										 	name:"Age",
-										 	render:rowData=>rowData['age']
+											 name: "Name",
+											 render: rowData => rowData['name']
+										 }, {
+											 name: "Age",
+											 render: rowData => rowData['age']
 										 }]}
-										 onPageChange={({pageIndex,pageSize})=>{
-										 	const ds=this.dataSource.slice(pageIndex*pageSize,pageIndex*pageSize+pageSize);
-										 	const state=Object.assign({},this.state,{
-										 		pageIndex,pageSize,dataSource:ds
-										 	});
-										 	this.setState(state);
+										 onPageChange={({pageIndex, pageSize}) => {
+											 const ds = this.dataSource.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize);
+											 const state = Object.assign({}, this.state, {
+												 pageIndex, pageSize, dataSource: ds
+											 });
+											 this.setState(state);
 										 }}
 										 ref="dt"
 										 pageIndex={this.state.pageIndex}></DataTableWithPagination>
@@ -204,19 +203,20 @@ class FixedHead extends React.PureComponent {
 	render() {
 		return (
 			<div
-				style={{height:300}}>
+				style={{height: 300}}>
 				<DataTable
-					style={{width:400}}
+					className="data-table data-table-fixed-head"
+					style={{width: 400}}
 					fixedHead={true}
 					dataSource={this.dataSource}
-					renderDataEmpty={()=>''}
+					renderDataEmpty={() => ''}
 					columns={[{
-						name:"Name",
-						render:rowData=>rowData['name']
-					 },{
-						name:"Age",
-						render:rowData=>rowData['age']
-					 }]}></DataTable>
+						name: "Name",
+						render: rowData => rowData['name']
+					}, {
+						name: "Age",
+						render: rowData => rowData['age']
+					}]}></DataTable>
 			</div>
 		);
 	}
@@ -269,7 +269,7 @@ class SortDataTable extends React.PureComponent {
 	onSortChange(sort) {
 		if (sort) {
 			let ds = [...this.state.dataSource];
-			ds.sort((a, b)=> {
+			ds.sort((a, b) => {
 				if (sort.type === 'asc') {
 					if (a[sort.field] < b[sort.field]) {
 						return 1;
@@ -297,21 +297,23 @@ class SortDataTable extends React.PureComponent {
 	render() {
 		return (
 			<div
-				style={{height:300}}>
+				style={{height: 300}}>
 				<DataTable
+					className="data-table"
 					dataSource={this.state.dataSource}
-					renderDataEmpty={()=>''}
+					renderDataEmpty={() => ''}
 					onSortChange={this.onSortChange.bind(this)}
 					columns={[{
-						name:"Name",
-						render:rowData=>rowData['name']
-					 },{
-						name:"Age",
-						render:rowData=>rowData['age'],
-						sort:{
-							field:'age',
+						name: "Name",
+						render: rowData => rowData['name']
+					}, {
+						name: "Age",
+						render: rowData => rowData['age'],
+						sort: {
+							field: 'age',
+							className:"data-table-sort"
 						}
-					 }]}></DataTable>
+					}]}></DataTable>
 			</div>
 		);
 	}
@@ -320,7 +322,7 @@ class SortDataTable extends React.PureComponent {
 class Example extends Component {
 	render() {
 		return (
-			<div style={{paddingBottom:"50px"}}>
+			<div style={{paddingBottom: "50px"}}>
 				<h5>Simple DataTable</h5>
 				<SimpleDataTableDemo/>
 				<h5>Empty DataTable</h5>

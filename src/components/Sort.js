@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 
 export default class Sort extends PureComponent {
 	static propTypes = {
@@ -11,7 +10,7 @@ export default class Sort extends PureComponent {
 	};
 	static defaultProps = {
 		defaultType: "none",
-		onChange: ()=>null
+		onChange: () => null
 	};
 
 	constructor(props) {
@@ -25,28 +24,28 @@ export default class Sort extends PureComponent {
 		return (
 			<div
 				style={this.props.style}
-				className={classnames('data-table-sort',this.props.className)}>
+				className={this.props.className}>
 				<a
-					onClick={()=>{
+					onClick={() => {
 						this.setState({
-							type:this.state.type=== 'asc'?'none':'asc'
-						},()=>{
+							type: this.state.type === 'asc' ? 'none' : 'asc'
+						}, () => {
 							this.props.onChange(this.state.type);
 						});
 					}}
 					href="javascript:void(0)"
-					className={this.state.type==='asc'?'active':''}>
+					className={this.state.type === 'asc' ? 'active' : ''}>
 					<img src={require('../assets/img/triangle-down.svg')}/>
 				</a>
 				<a
-					onClick={()=>{
+					onClick={() => {
 						this.setState({
-							type:this.state.type==="desc"?'none':'desc'
-						},()=>{
+							type: this.state.type === "desc" ? 'none' : 'desc'
+						}, () => {
 							this.props.onChange(this.state.type);
 						})
 					}}
-					className={this.state.type==='desc'?'active':''}
+					className={this.state.type === 'desc' ? 'active' : ''}
 					href="javascript:void(0)">
 					<img src={require('../assets/img/triangle-down.svg')}/>
 				</a>

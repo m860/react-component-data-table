@@ -16,10 +16,6 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = require("classnames");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
 var _Sort = require("./Sort");
 
 var _Sort2 = _interopRequireDefault(_Sort);
@@ -241,7 +237,7 @@ var DataTable = function (_PureComponent) {
 				"table",
 				{
 					ref: "table",
-					className: (0, _classnames2.default)('data-table', this.props.fixedHead && "data-table-fixed-head", this.props.className),
+					className: this.props.className,
 					style: this.props.style },
 				_react2.default.createElement(
 					"thead",

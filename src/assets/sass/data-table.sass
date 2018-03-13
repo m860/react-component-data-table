@@ -1,5 +1,8 @@
-@import "Pagination"
-@import "Sort"
+/**
+ * Created by jean.h.ma on 12/03/2018.
+ */
+
+//#region data-table
 .data-table
   border-radius: 5px
   background-color: white
@@ -55,4 +58,56 @@
       flex: 0 0 auto
       td
         flex: 1 0 auto
+//#endregion
 
+//#region Sort
+.data-table-sort
+  display: flex
+  flex-direction: column
+  margin-left: 5px
+  img
+    width: 10px
+    height: 10px
+  a
+    display: flex
+    opacity: 0.2
+  a:first-child
+    align-items: flex-end
+    img
+      transform: rotate(180deg)
+  a:last-child
+    align-items: flex-start
+  a.active
+    opacity: 1
+//#endregion
+
+//#region Pagination
+.pagination
+  display: flex
+  flex-direction: row
+  margin: 0
+  padding: 0
+  user-select: none
+  li
+    list-style: none
+    display: flex
+    align-items: center
+    a
+      color: #5f6062
+      outline: none
+      text-decoration: none
+      padding: 8px 12px
+      border-radius: 4px
+      display: block
+  li.disabled
+    cursor: not-allowed
+    opacity: 0.5
+    a
+      pointer-events: none
+      color: gray
+
+  li.cur
+    a
+      color: white
+      background-color: #ee6e73
+//#endregion

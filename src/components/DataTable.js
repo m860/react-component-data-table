@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import classnames from 'classnames'
 import Sort from './Sort'
 
 /**
@@ -167,10 +166,10 @@ export default class DataTable extends PureComponent {
 	static defaultProps = {
 		dataSource: [],
 		fixedHead: false,
-		renderDataEmpty: (definedColumn)=>(<tr>
-			<td colSpan={definedColumn.length} style={{textAlign:"center"}}>NO DATA</td>
+		renderDataEmpty: (definedColumn) => (<tr>
+			<td colSpan={definedColumn.length} style={{textAlign: "center"}}>NO DATA</td>
 		</tr>),
-		onSortChange: ()=>null
+		onSortChange: () => null
 	};
 
 	constructor(props) {
@@ -234,10 +233,10 @@ export default class DataTable extends PureComponent {
 	 * */
 	_renderDataSource() {
 		if (this.props.dataSource.length > 0) {
-			return this.props.dataSource.map((rowData, rowDataIndex)=> {
+			return this.props.dataSource.map((rowData, rowDataIndex) => {
 				return (
 					<tr key={rowDataIndex}>
-						{this.props.columns.map((column, columnIndex)=> {
+						{this.props.columns.map((column, columnIndex) => {
 							return (
 								<td key={columnIndex}
 									className={column.className}
@@ -255,23 +254,23 @@ export default class DataTable extends PureComponent {
 		return (
 			<table
 				ref="table"
-				className={classnames('data-table',this.props.fixedHead&&"data-table-fixed-head",this.props.className)}
+				className={this.props.className}
 				style={this.props.style}>
 				<thead ref="thead">
 				<tr>
-					{this.props.columns.map((column, index)=> {
+					{this.props.columns.map((column, index) => {
 						return (
 							<th key={index}>
 								<div>
 									<div>{column.name}</div>
-									<div>{column.sort && <Sort {...column.sort} onChange={type=>{
+									<div>{column.sort && <Sort {...column.sort} onChange={type => {
 										this.setState(
-											Object.assign({},this.state,{
-												activeSort:{
+											Object.assign({}, this.state, {
+												activeSort: {
 													...column.sort,
 													type
 												}
-											}),()=>{
+											}), () => {
 												this.props.onSortChange(this.state.activeSort);
 											}
 										)
@@ -282,7 +281,7 @@ export default class DataTable extends PureComponent {
 					})}
 				</tr>
 				</thead>
-				<tbody style={this.props.fixedHead?{height:this.state.bodyHeight}:{}}>
+				<tbody style={this.props.fixedHead ? {height: this.state.bodyHeight} : {}}>
 				{this._renderDataSource()}
 				</tbody>
 			</table>

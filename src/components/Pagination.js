@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 
 /**
  * Pagination - 页码
@@ -52,11 +51,11 @@ export default class Pagination extends PureComponent {
 		startPageNumber: 0,
 		pageIndex: 0,
 		pageSize: 10,
-		onPageChange: ()=>null,
-		className: "pagination",
+		onPageChange: () => null,
 		displayPageCount: 5,
-		renderNextPage: ()=><img style={{width:20,height:20,transform:'rotate(180deg)'}} src={require('../assets/img/angle-left.svg')}/>,
-		renderPrevPage: ()=><img style={{width:20,height:20}} src={require('../assets/img/angle-left.svg')}/>
+		renderNextPage: () => <img style={{width: 20, height: 20, transform: 'rotate(180deg)'}}
+								   src={require('../assets/img/angle-left.svg')}/>,
+		renderPrevPage: () => <img style={{width: 20, height: 20}} src={require('../assets/img/angle-left.svg')}/>
 	};
 
 	constructor(props) {
@@ -112,7 +111,7 @@ export default class Pagination extends PureComponent {
 	}
 
 	render() {
-		const pages = Array.apply(null, {length: this.totalPage}).map(Number.call, value=> {
+		const pages = Array.apply(null, {length: this.totalPage}).map(Number.call, value => {
 			return value + this.state.startPageNumber;
 		});
 		const lastPageIndex = pages[pages.length - 1];
@@ -152,43 +151,43 @@ export default class Pagination extends PureComponent {
 		const hasRight = end < lastPageIndex;
 		return (
 			<ul className={this.props.className} style={this.props.style}>
-				<li className={classnames(disabledPrevButton?"disabled":'')}>
-					<a onClick={()=>{
-						const prevIndex=this.state.pageIndex-1;
-						const state=Object.assign({},this.state,{
-							pageIndex:prevIndex
+				<li className={disabledPrevButton ? "disabled" : ''}>
+					<a onClick={() => {
+						const prevIndex = this.state.pageIndex - 1;
+						const state = Object.assign({}, this.state, {
+							pageIndex: prevIndex
 						});
-						this.setState(state,()=>{
-							this.props.onPageChange(Object.assign({},this.state));
+						this.setState(state, () => {
+							this.props.onPageChange(Object.assign({}, this.state));
 						})
 					}} href="javascript:void(0)">{this.props.renderPrevPage()}</a>
 				</li>
 				{hasLeft && <li>...</li>}
-				{displayPages.map((num, i)=> {
+				{displayPages.map((num, i) => {
 					return (
 						<li
-							className={classnames(this.state.pageIndex===num?"cur":'')}
+							className={this.state.pageIndex === num ? "cur" : ''}
 							key={num}>
-							<a onClick={()=>{
-								const state=Object.assign({},this.state,{
-									pageIndex:num
+							<a onClick={() => {
+								const state = Object.assign({}, this.state, {
+									pageIndex: num
 								});
-								this.setState(state,()=>{
-									this.props.onPageChange(Object.assign({},this.state));
+								this.setState(state, () => {
+									this.props.onPageChange(Object.assign({}, this.state));
 								});
 							}} href="javascript:void(0)">{this.startPageNumber === 0 ? num + 1 : num}</a>
 						</li>
 					);
 				})}
 				{hasRight && <li>...</li>}
-				<li className={classnames(disabledNextButton?"disabled":"")}>
-					<a onClick={()=>{
-						const nextIndex=this.state.pageIndex+1;
-						const state=Object.assign({},this.state,{
-									pageIndex:nextIndex
-								});
-						this.setState(state,()=>{
-							this.props.onPageChange(Object.assign({},this.state));
+				<li className={disabledNextButton ? "disabled" : ""}>
+					<a onClick={() => {
+						const nextIndex = this.state.pageIndex + 1;
+						const state = Object.assign({}, this.state, {
+							pageIndex: nextIndex
+						});
+						this.setState(state, () => {
+							this.props.onPageChange(Object.assign({}, this.state));
 						})
 					}} href="javascript:void(0)">{this.props.renderNextPage()}</a>
 				</li>

@@ -33,7 +33,7 @@ $ npm i react-component-data-table --save
 
 ```javascript
 //如果需要自定义样式,请替换为自己的样式文件即可
-import 'react-component-data-table/asstes/css/DataTable.css'
+import 'react-component-data-table/asstes/css/data-table.css'
 import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data-table'
 ```
 
