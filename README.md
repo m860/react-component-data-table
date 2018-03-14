@@ -39,6 +39,10 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 
 ## Change Log
 
+### 1.3.1
+
+- 调整了自带样式,所有的组件在使用的时候必须指定对应样式
+
 ### 1.3.0
 
 -   优化bodyHeight的计算,当`fixedHead=true`时

@@ -131,7 +131,8 @@ class DataTableWithPaginationDemo extends React.PureComponent {
 				</button>
 				<DataTableWithPagination dataSource={this.state.dataSource}
 										 renderDataEmpty={() => ''}
-										 dataTableClassName="abc"
+										 dataTableClassName="data-table"
+										 paginationClassName="pagination"
 										 pageSize={this.state.pageSize}
 										 total={this.dataSource.length}
 										 paginationStyle={{marginTop: 5}}
