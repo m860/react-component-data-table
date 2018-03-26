@@ -41,7 +41,7 @@ import {DataTable,Pagination,DataTableWithPagination} from 'react-component-data
 
 ### 1.3.1
 
-- 调整了自带样式,所有的组件在使用的时候必须指定对应样式
+-   调整了自带样式,所有的组件在使用的时候必须指定对应样式
 
 ### 1.3.0
 
